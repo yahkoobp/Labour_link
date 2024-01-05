@@ -1,0 +1,71 @@
+
+.inputBox{
+    position: relative;
+    width:100%;
+}
+
+.inputBox input{
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid gray;
+    font-weight:500;
+    outline: none;
+    font-size: 1em;
+
+}
+.input{
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid gray;
+    outline: none;
+    font-size: 1em;
+}
+
+.inputBox select{
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid gray;
+    color: gray;
+    outline: none;
+    font-size: 1em;
+
+}
+.inputBox option{
+    padding: 20px;
+    color: black;
+    
+}
+.inputBox span{
+position: absolute;
+left: 0;
+padding: 10px;
+pointer-events: none;
+font-size: 1em;
+transition: 0.2s;
+color: gray;
+
+}
+.inputBox input:focus{
+    border-bottom: 2px solid #002D74;
+}
+
+.inputBox input:valid ~ span,
+.inputBox input:focus ~ span
+{
+    color:#002D74;
+    transform: translateY(-9px);
+    font-size: 0.9em;
+    padding: 0 10px;
+    
+}
+
+.inputBox select:valid ~ span,
+.inputBox select:focus ~ span
+{
+    transform: translateY(-9px);
+    font-size: 0.9em;
+    padding: 0 10px;
+    color:#002D74;
+   
+    
+}
