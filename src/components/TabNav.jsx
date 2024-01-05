@@ -158,18 +158,16 @@ import JobPosts from './JobPosts';
          {visibleBox &&
          <Fade in={true} timeout={1000}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider',fontWeight:"bold" }}>
-            <TabList onChange={handleChange} aria-label="lab API tabs example" indicatorColor='secondary' variant="scrollable"
-              scrollButtons="auto">
+            <TabList onChange={handleChange} aria-label="lab API tabs example" indicatorColor='secondary' centered>
               <Tab label="Jobs" value="1"  sx={{fontWeight:"bold"}}/>
               <Tab label="Committed" value="2" sx={{fontWeight:"bold"}}/>
               <Tab label="Post a job" value="3" sx={{fontWeight:"bold"}} />
-              <Tab label="Job posts" value="4" sx={{fontWeight:"bold"}} />
             </TabList>
           </Box>
           </Fade>}
           <TabPanel value="1">
-          <div className='sticky z-100 top-0 w-full ml-0'>
-        <div className=' py-4 bg-white w-full'>
+          <div className='sticky z-100 bg-white top-0 w-full ml-0'>
+        <div className=' py-4 w-full'>
         <div className='w-full flex items-center justify-center'>
         <Paper  onChange={(e)=>{setFilterQuery(e.target.value)
         setSelected(false)
@@ -228,9 +226,6 @@ import JobPosts from './JobPosts';
           </TabPanel>
           <TabPanel value="3">
             <PostJob/>
-          </TabPanel>
-          <TabPanel value="4">
-            <JobPosts/>
           </TabPanel>
         </TabContext>
       </Box>

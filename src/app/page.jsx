@@ -4,18 +4,17 @@ import Link from 'next/link'
 
 export default function Landing() {
   return (
-    <div className='bg-white h-screen  w-full relative'>
-      <div className='w-full h-[250px]'>
-        <img src="
-        " alt="" />
+    <div className='bg-white h-screen  w-full relative flex flex-col items-center justify-center'>
+      <div className='w-full h-[300px] flex items-center justify-center md:hidden'>
+        <Image src="/man2.png" width={500} height={500} className='filter grayscale contrast-150'/>
       </div>
-      <div className='flex flex-col gap-4 items-center justify-center mt-6'>
+      <div className='flex flex-col gap-2 items-center justify-center mt-1'>
       <div className='flex items-center justify-center gap-3'>
         <img className='w-[30px] h-[30px] object-cover' src="https://firebasestorage.googleapis.com/v0/b/labour-link-4cb81.appspot.com/o/l.png?alt=media&token=6a40f6c2-a8b1-48ae-b8af-7eb3b65f6cb0" alt="" />
       <h1 className="text-3xl font-semibold">LabourLink</h1>
       </div>
       <p className='font-semibold font-lg'>Hello , Lets get start working together</p>
-      <Link href="/register"><button className=' bg-gray-800 px-14 py-3 rounded-full text-white font-bold relative top-5'>Sign Up with Email</button></Link>
+      <Link href="/register"><button className=' bg-gray-800 px-14 py-3 rounded-full text-white font-bold relative top-4'>Sign Up with Email</button></Link>
       </div>
 
       <div className='mt-6 text-gray-500 grid grid-cols-3 items-center justify-center p-6 gap-2'>
@@ -35,11 +34,11 @@ export default function Landing() {
 </svg>
          </div> 
       </div>
-      {/* <div className='flex items-center justify-center mt-6 px-20'>
+      <div className='flex items-center justify-center mt-6 px-20'>
         <p className='text-[11px] text-center text-gray-500'>By continuing, you agree to Labourlinks's <span className='font-bold text-black'>Terms of Use</span> and <span className='font-bold text-black'>Privacy Policy</span></p>
-      </div> */}
+      </div>
 
-      <div className='absolute bottom-0 left-0 bg-gray-100 h-[40px] w-full flex items-center justify-center'>
+      <div className='bg-gray-100 h-[40px] w-full flex items-center justify-center'>
           <p className='text-sm'>Have an account? <Link href="/login">Log in</Link></p>
       </div>
 

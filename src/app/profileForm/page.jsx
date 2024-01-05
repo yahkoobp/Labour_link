@@ -34,7 +34,7 @@ const ProfileForm = () => {
             timeStamp : serverTimestamp()
         })
         setLoading(false)
-        route.push("/home")
+        route.replace("/home")
 
       } catch (error) {
         setLoading(false)

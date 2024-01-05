@@ -19,7 +19,7 @@ function LoginPage() {
       setLoading(true)
       await login(email,password)
       setLoading(false)
-      route.push("/profileForm")
+      route.replace("/home")
     } catch (error) {
       setError(error.message)
       setLoading(false)

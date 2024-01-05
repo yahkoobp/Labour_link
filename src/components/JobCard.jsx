@@ -10,7 +10,7 @@ const JobCard = (props) => {
   const job = props.job
     const j_id = props.job.job_id
   return (
-    <div className=' bg-gray-50 rounded-md'>
+    <div className='rounded-md'>
       <Fade in={true} timeout={1000}>
       <Link href={`/jobs/${j_id}`}>
         <div className='flex flex-col shadow-md mt-2 rounded-md p-6 gap-3 border border-gray-200'>

@@ -15,7 +15,9 @@ import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlin
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import AllInboxIcon from '@mui/icons-material/AllInbox';
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 const Homepage = () => {
     const {user,logout} = useUserAuthContext()
@@ -31,7 +33,7 @@ const Homepage = () => {
     }
   return (
     <div className='bg-gray-100 h-[100vh]'>
-        <div className='w-full h-[100px] bg-blue-800 rounded-b-lg flex flex-col items-center justify-center sticky top-0 left-0'>
+        <div className='w-full h-[100px] bg-blue-900 flex flex-col items-center justify-center sticky top-0 left-0'>
           <div className='flex items-center justify-between w-full'>
              <MenuIcon sx={{color:"white",margin:1,cursor:"pointer"}} onClick = {()=>{setDrawerOpen(true)}}/>
              <ChatIcon sx={{color:"white",margin:1}}/>
@@ -50,7 +52,7 @@ const Homepage = () => {
       />
     </Paper>
         </div>
-        <div className='p-3'>
+        <div className='p-6'>
           <div className='flex items-center justify-between'>
         <h2 className='font-heading'>Suggested Jobs(5)</h2>
         <h2 className='font-heading text-blue-800 cursor-pointer'>View all jobs</h2>
@@ -63,7 +65,7 @@ const Homepage = () => {
           </div>
         </div>
 
-        <div className='p-3'>
+        <div className='p-6'>
         <h2 className='font-heading'>Peoples you may know(5)</h2>
           <div className='flex gap-2 overflow-x-auto no-scrollbar mt-2'>
             <HomePeopleCard/>
@@ -114,6 +116,11 @@ const Homepage = () => {
                   <BookmarkBorderOutlinedIcon sx={{color:"gray",width:17,height:17}}/>
                   <p className='text-[13px] font-semibold'>Saved Jobs</p>
                 </div>
+
+               <Link href='/jobPosts'> <div className='flex gap-3 items-center justify-start cursor-pointer p-2 hover:bg-gray-100 w-full'>
+                  <AllInboxIcon sx={{color:"gray",width:17,height:17}}/>
+                  <p className='text-[13px] font-semibold'>My job posts</p>
+                </div></Link>
 
                 <div className='flex gap-3 items-center justify-start cursor-pointer p-2 hover:bg-gray-100 w-full'>
                   <SettingsOutlinedIcon sx={{color:"gray",width:17,height:17}}/>

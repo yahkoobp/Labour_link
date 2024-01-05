@@ -6,6 +6,7 @@ import PlaceIcon from '@mui/icons-material/Place';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../../../firebaseConfig';
 import { usePathname, useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const JobView = () => {
     const [jobDetails , setJobDetails] = useState({})
@@ -178,8 +179,8 @@ useEffect(()=>{
     </div>
 
 
-    <div className='px-5 flex items-start justify-center gap-2 sticky bottom-0 left-0 mt-2'>
-        <button id='int-btn' onClick={()=>setDrawerOpen(true)} className='px-4 py-3 bg-blue-400 text-white font-semibold rounded-md w-full'>Show interest</button>
+    <div className='px-5 flex items-start justify-center gap-2 sticky bottom-0 left-0 mt-2 w-full'>
+        <Link className='w-full' href={`${pathname}/apply-form`}><button id='int-btn' className='px-4 py-3 bg-blue-400 text-white font-semibold rounded-md w-full'>Show interest</button></Link>
     </div>
     </div>
   )
