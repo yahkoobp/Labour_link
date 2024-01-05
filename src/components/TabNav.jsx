@@ -206,7 +206,7 @@ import JobPosts from './JobPosts';
       )) 
        :
         AllJobs.map((job)=>(
-        <JobCard job={job}/>
+        <JobCard key={job.job_id} job={job}/>
       ))}
       <Fade in={true} timeout={1000}>
         <div id="filter" ref={filterRef} className='fixed z-50 bottom-16 left-0 w-full flex items-center 
@@ -263,7 +263,7 @@ import JobPosts from './JobPosts';
           placeholder='Search by Location' onChange={(e)=>{setCityFilter(e.target.value)}}/>
         <FormGroup>
           { kerala_cities.filter((city=>city.toLowerCase().includes(cityFilter.toLocaleLowerCase()))).map((city)=>(
-           <FormControlLabel value={city} control={<Checkbox  color='success' checked={filterLocation.includes(city)} onChange={handleCheckBox}/>} label={city}/>
+           <FormControlLabel key={city} value={city} control={<Checkbox  color='success' checked={filterLocation.includes(city)} onChange={handleCheckBox}/>} label={city}/>
           ))
           }
        </FormGroup>

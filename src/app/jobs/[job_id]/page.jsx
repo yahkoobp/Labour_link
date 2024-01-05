@@ -19,7 +19,7 @@ const JobView = () => {
         const fetchData = async()=>{
           try {
             const jobdocRef = doc(db, "jobs", job_id);
-          const jobdocSnap = await getDoc(jobdocRef);
+           const jobdocSnap = await getDoc(jobdocRef);
       
           if (jobdocSnap.exists()) {
             setJobDetails(jobdocSnap.data())
@@ -34,7 +34,7 @@ const JobView = () => {
           fetchData()
       },[job_id])
 
-const job_poster_id = jobDetails.job_poster
+const job_poster_id = jobDetails?.job_poster
 
 useEffect(()=>{
     console.log("useeffect 2 is running....")
@@ -53,7 +53,7 @@ useEffect(()=>{
     }
   }
     }catch(err){
- console.log(err)
+      console.log(err)
     }
   }
     fetchData()
