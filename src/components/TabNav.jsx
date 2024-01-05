@@ -202,7 +202,7 @@ import JobPosts from './JobPosts';
     </div>
     <div>
     {filterQuery!=="" && selected ? jobsByTitle.map((job)=>(
-        <JobCard job={job}/>
+        <JobCard key={job} job={job}/>
       )) 
        :
         AllJobs.map((job)=>(

@@ -191,7 +191,7 @@ const MyProfile = () => {
           </div>
           <div className='flex gap-3 p-3 flex-wrap'>
             {userDetails.work_areas?.map((work)=>(
-            <Chip label={work} size='' variant='outlined' sx={{color:"gray"}} onDelete={()=>{}}/>
+            <Chip key={work} label={work} size='' variant='outlined' sx={{color:"gray"}} onDelete={()=>{}}/>
             ))}
           </div>
         </div>

@@ -46,7 +46,7 @@ const Peoples = () => {
         <div className='flex flex-wrap gap-3 px-2 py-2 items-center justify-center bg-gray-50'>
          {
           users.map((user)=>(
-            <PeopleCard user={user}/>
+            <PeopleCard key={user.id} user={user}/>
           ))
          }
          </div>
