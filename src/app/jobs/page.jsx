@@ -1,7 +1,7 @@
 'use client'
 import BottomTab from '@/components/BottomTab'
 import TabNav from '@/components/TabNav'
-import React, { useState } from 'react'
+import React, { Suspense, useState } from 'react'
 
 const Jobs = ({params}) => {
     const [value , setValue] = useState(0)

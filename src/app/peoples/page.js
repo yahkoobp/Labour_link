@@ -1,40 +1,13 @@
 'use client'
-import React, { useEffect, useState } from 'react'
-import { useUserAuthContext } from '../context/userAuthContext'
-import { collection, getDocs } from 'firebase/firestore'
-import { db } from '../../../firebaseConfig'
 import PeopleCard from '@/components/PeopleCard'
 import BottomTab from '@/components/BottomTab'
+import { usePeoples } from '@/hooks/usePeoples'
 
-const fetchUsers = async () =>{
-  let list = []
-  try {
-    const querySnapShot = await getDocs(collection(db , "users"));
-    querySnapShot.forEach((doc)=>{
-      list.push({id: doc.id ,...doc.data()})
-    })
-
-    return list
-  } catch (error) {
-    console.log(error)
-  }
-}
 
 const Peoples = () => {
-  const {user , logout} = useUserAuthContext()
-  const [users , setUsers] = useState([])
-  const [loading , setLoading] = useState(false)
-  console.log(users)
-
-  useEffect(()=>{
-      setLoading(true)
-      const fetchData = async()=>{
-      const result = await fetchUsers()
-      setUsers(result)
-      setLoading(false)
-    }
-    fetchData()
-  },[])
+  
+  const {data} = usePeoples()
+  console.log(data)
   return (
     <div className='flex flex-col items-center justify-center '>
         <div className='sticky z-50 top-0 w-full'>
@@ -45,7 +18,7 @@ const Peoples = () => {
        </div>
         <div className='flex flex-wrap gap-3 px-2 py-2 items-center justify-center bg-gray-50'>
          {
-          users.map((user)=>(
+          data?.map((user)=>(
             <PeopleCard key={user.id} user={user}/>
           ))
          }

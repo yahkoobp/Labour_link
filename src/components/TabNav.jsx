@@ -1,5 +1,5 @@
 'use client'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -14,12 +14,10 @@ import { jobs, kerala_cities, kerala_places } from '../data';
 import { Autocomplete, Drawer, Fade, FormControl, FormControlLabel, FormGroup, FormLabel, Radio, RadioGroup, TextField } from '@mui/material';
 import TuneIcon from '@mui/icons-material/Tune';
 import Checkbox from '@mui/material/Checkbox';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../firebaseConfig';
 import JobCard from './JobCard';
 import { useUserAuthContext } from '@/app/context/userAuthContext';
 import PostJob from './PostJob';
-import JobPosts from './JobPosts';
+import { useJobs } from '@/hooks/useJobs';
 
 
 
@@ -27,7 +25,6 @@ import JobPosts from './JobPosts';
     const {user} = useUserAuthContext()
     const [value, setValue] = React.useState('1');
     const [visibleBox , setVisibleBox] = useState(true)
-    const [AllJobs ,setAllJobs] = useState([])
     const [jobsByTitle , setJobsByTitle] = useState([])
     const [selected , setSelected] = useState(false)
     const [drawerOpen , setDrawerOpen] = useState(false)
@@ -47,7 +44,6 @@ import JobPosts from './JobPosts';
     const filter2 = filter2Ref.current
     const filter3 = filter3Ref.current
     const listView = listViewRef.current
-    const container = containerRef.current
 
 
     if(selection ==1){
@@ -64,40 +60,8 @@ import JobPosts from './JobPosts';
       filter3?.classList?.add("bg-gray-300")
     }
 
-   
-   
-    // console.log(jobsByTitle)
-
-    useEffect(()=>{
-      console.log("useeffect is working")
-      let unSubscribe = false
-      const fetchJob = async()=>{
-        console.log("function is working.....")
-        let list = []
-        try {
-          const querySnapShot = await getDocs(collection(db , "jobs"));
-          querySnapShot.forEach((doc)=>{
-            list.push({job_id: doc.id ,...doc.data()})
-          })
-          setAllJobs(list)
-          console.log(list)
-        //   const filteredJobs = list?.filter((job)=>userDetails.work_areas?.includes(job.job_title))
-        //   console.log(filteredJobs)
-        //   setUserJobs(filteredJobs)
-        } catch (error) {
-          console.log(error)
-        }
-      }
-      if(unSubscribe == false){
-       fetchJob()
-      }
-
-      return () => {
-        console.log("component unmonted and cleaning up")
-        unSubscribe = true
-      }
-
-    },[])
+    const {data} = useJobs()
+    console.log(data)
     
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -108,7 +72,7 @@ import JobPosts from './JobPosts';
       setFilterQuery(item)
       setSelected(true)
       let list = []
-      const filteredJobs = AllJobs.filter((job)=>{return(job.job_title == item)})
+      const filteredJobs = data.filter((job)=>{return(job.job_title == item)})
       setJobsByTitle(filteredJobs)
     }
     
@@ -117,21 +81,6 @@ import JobPosts from './JobPosts';
     }else{
       listView?.classList?.remove("hidden")
     }
-
-
-    // let lastScroll = 0
-    //   container?.addEventListener("scroll",(event)=>{
-    //     const currentScroll = window.scrollY
-    //     if(currentScroll > lastScroll){
-    //     filter?.classList?.add("hidden")
-    // }
-
-    // if(currentScroll < lastScroll){
-    //   filter?.classList?.remove("hidden")
-    // }
-    // lastScroll = currentScroll
-    // })
-
     const handleCheckBox = (e,val) =>{
         const index = filterLocation.indexOf(e.target.value)
         if(index === -1){
@@ -156,15 +105,13 @@ import JobPosts from './JobPosts';
       <Box sx={{ width: '100%', typography: 'body1' }}>
         <TabContext value={value} >
          {visibleBox &&
-         <Fade in={true} timeout={1000}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider',fontWeight:"bold" }}>
             <TabList onChange={handleChange} aria-label="lab API tabs example" indicatorColor='secondary' centered>
               <Tab label="Jobs" value="1"  sx={{fontWeight:"bold"}}/>
               <Tab label="Committed" value="2" sx={{fontWeight:"bold"}}/>
               <Tab label="Post a job" value="3" sx={{fontWeight:"bold"}} />
             </TabList>
-          </Box>
-          </Fade>}
+          </Box>}
           <TabPanel value="1">
           <div className='sticky z-100 bg-white top-0 w-full ml-0'>
         <div className=' py-4 w-full'>
@@ -203,10 +150,9 @@ import JobPosts from './JobPosts';
         <JobCard key={job} job={job}/>
       )) 
        :
-        AllJobs.map((job)=>(
+        data?.map((job)=>(
         <JobCard key={job.job_id} job={job}/>
       ))}
-      <Fade in={true} timeout={1000}>
         <div id="filter" ref={filterRef} className='fixed z-50 bottom-16 left-0 w-full flex items-center 
          justify-center transition-opacity ease-in-out duration-500'>
         <div className='rounded-full px-6 py-1 flex items-center justify-center gap-2 shadow-lg bg-white cursor-pointer'
@@ -216,7 +162,6 @@ import JobPosts from './JobPosts';
          <h2 className='font-heading'>Filter</h2>
          </div>
       </div>
-      </Fade>
       </div>
       
 

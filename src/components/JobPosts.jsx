@@ -45,7 +45,7 @@ const JobPosts = () => {
       { 
         jobPosts.map((job)=>(
         <div key={job.id} className=' bg-gray-50 rounded-md'>
-      <Link href='/'>
+      <Link href={`/jobPosts/${job.id}`}>
         <div className='flex flex-col shadow-sm mt-2 rounded-md p-6 gap-3'>
           <div className='flex items-center justify-between'>
             <div className='flex gap-2'>

@@ -5,13 +5,14 @@ import PlaceIcon from '@mui/icons-material/Place';
 import QuickreplyIcon from '@mui/icons-material/Quickreply';
 import { Fade } from '@mui/material';
 import Link from 'next/link';
+import { useUserAuthContext } from '@/app/context/userAuthContext';
 
 const JobCard = (props) => {
+  const {user} = useUserAuthContext()
   const job = props.job
     const j_id = props.job.job_id
   return (
     <div className='rounded-md'>
-      <Fade in={true} timeout={1000}>
       <Link href={`/jobs/${j_id}`}>
         <div className='flex flex-col shadow-md mt-2 rounded-md p-6 gap-3 border border-gray-200'>
             <div className='flex gap-2 items-center'>
@@ -39,14 +40,16 @@ const JobCard = (props) => {
               </div>
                 <p className='font-bold text-[12px] text-green-900'>Active now</p>
             </div>
-            <div className='flex gap-2 justify-start items-center'>
+            <div className='flex gap-2 justify-between items-center'>
+              <div className='flex gap-2 justify-start items-center'>
                 <QuickreplyIcon sx={{width:"20px"}}/>
                 <p className='font-bold text-[12px] text-green-800'>14 Interests</p>
+                </div>
+                <p className='font-bold text-[12px] text-green-800'>{job.responses.includes(user.uid) && "Applied"}</p>
             </div>
 
         </div>
         </Link>
-        </Fade>
     </div>
   )
 }

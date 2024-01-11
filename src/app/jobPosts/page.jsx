@@ -10,41 +10,15 @@ import { useUserAuthContext } from '../context/userAuthContext';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../../firebaseConfig';
 import { useRouter } from 'next/navigation';
+import { useJobPosts } from '@/hooks/useJobPosts';
 
 
 
 const JobPosts = () => {
-  const [jobPosts , setJobPosts] = useState([])
   const {user} = useUserAuthContext()
   const router = useRouter()
-  useEffect(()=>{
-    let unSubscribe = false
-    let list = []
-    try {
-      const fetchData = async()=>{
-        const jobsQuery = query(
-          collection(db,"jobs"),
-          where("job_poster","==",user && user.uid)
-        )
-        const querySnapshot = await getDocs(jobsQuery);
-        querySnapshot.forEach((doc) => {
-          list.push({id: doc.id ,...doc.data()})
-});
-      setJobPosts(list)
-      console.log(jobPosts)
-    }
-    if(unSubscribe == false){
-        
-           fetchData()
-    }
-      
-    } catch (error) {
-      console.log(error)
-    }
-
-    return () =>{ unSubscribe = true}
-  },[user])
-
+  const {data:jobPosts} = useJobPosts(user?.uid)
+  console.log(jobPosts)
   return (
      <>
     <div className='h-[50px] shadow-md p-3 sticky top-0 bg-white'>
@@ -54,11 +28,11 @@ const JobPosts = () => {
             }} sx={{color:'gray',cursor:"pointer"}}/>
         </div>
     <div className='p-6'>
-      <h1 className='font-heading'>Your job posts({jobPosts.length})</h1>
+      <h1 className='font-heading'>Your job posts({jobPosts?.length})</h1>
       { 
-        jobPosts.map((job)=>(
+        jobPosts?.map((job)=>(
         <div key={job.id} className=' bg-gray-50 rounded-md'>
-      <Link href='/'>
+      <Link href={`/jobPosts/${job.id}`}>
         <div className='flex flex-col shadow-md mt-2 rounded-md p-6 gap-3 border border-gray-100 '>
           <div className='flex items-center justify-between'>
             <div className='flex gap-2'>
@@ -89,7 +63,7 @@ const JobPosts = () => {
             </div>
             <div className='flex gap-2 justify-start items-center'>
                 <QuickreplyIcon sx={{width:"20px"}}/>
-                <p className='font-bold text-[12px] text-green-900'>14 responses</p>
+                <p className='font-bold text-[12px] text-green-900'>{job.responses.length} Responses</p>
             </div>
 
         </div>

@@ -19,6 +19,8 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db, storage } from '../../../firebaseConfig';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { useRouter } from 'next/navigation';
+import { useSinglePeoples } from '@/hooks/useSinglePeople';
+import Link from 'next/link';
 
 const MyProfile = () => {
   const {user ,logout} = useUserAuthContext()
@@ -33,30 +35,9 @@ const MyProfile = () => {
       return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
 
-    useEffect(()=>{
-      let unSubscribe = false
-      const fetchData = async()=>{
-        console.log("function calling...")
-        if(user){
-        const docRef = doc(db, "users", user?.uid);
-        const docSnap = await getDoc(docRef);
-        console.log("working.......")
-        
-        if (docSnap.exists()) {
-          setUserDetails(docSnap.data())
-        } else {
-          console.log("No such document!");
-        }
-      }
-    }
-        if(unSubscribe == false){
-        fetchData()
-        }
-        return () =>{
-          console.log("component is unmounting....")
-          unSubscribe = true
-        }
-    },[user , updateToggler])
+    const {data} = useSinglePeoples(user?.uid)
+    
+    console.log(data)
 
     useEffect(()=>{
       const updateData = async(img)=>{
@@ -121,7 +102,7 @@ const MyProfile = () => {
                 e.preventDefault()
                 router.back()
             }} sx={{color:'gray',cursor:"pointer"}}/>
-            <EditIcon sx={{color:"darkblue"}}/>
+           <Link href='/updateProfile'><EditIcon sx={{color:"darkblue"}}/></Link>
         </div>
         <div className='flex flex-col p-4'>
         <div className='flex flex-col gap-2 items-center justify-center p-3 w-full'>
@@ -130,15 +111,15 @@ const MyProfile = () => {
                 }}/>
                 <label htmlFor="file">
         <div className=' w-[60px] h-[60px] rounded-full bg-gray-200 flex items-center justify-center border border-gray-300 cursor-pointer'>
-          {loading?<CircularProgress>{loadingProgress}</CircularProgress>:userDetails?.image?
-            <img src={userDetails?.image}
+          {loading?<CircularProgress>{loadingProgress}</CircularProgress>:data?.image?
+            <img src={data?.image}
              className='w-full h-full rounded-full object-cover' alt="bdhbhdbh" /> :
              <PersonAddAlt1Icon sx={{color:"gray" ,width:"30px" , height:"30px"}}/>
           }
         </div>
         </label>
-        <h1 className='font-heading text-lg'>{userDetails.firstname} {userDetails.lastname}</h1>
-        <p className='text-gray-600 font-semibold text-center text-sm'>{userDetails.bio}</p>
+        <h1 className='font-heading text-lg'>{data?.firstname} {data?.lastname}</h1>
+        <p className='text-gray-600 font-semibold text-center text-sm'>{data?.bio}</p>
         </div>
 
         <div className='flex flex-col items-center justify-center mt-4 rounded-md p-3 gap-3 bg-green-50'>
@@ -152,15 +133,15 @@ const MyProfile = () => {
           </div>
           <div className='flex justify-start items-center w-full gap-3'>
             <PlaceIcon sx={{color:"gray",width:20,height:20}}/>
-            <p className='font-semibold text-[14px]'>{userDetails.city}</p>
+            <p className='font-semibold text-[14px]'>{data?.city}</p>
           </div>
           <div className='flex justify-start items-center w-full gap-3'>
             <EmailIcon sx={{color:"gray",width:20,height:20}}/>
-            <p className='font-semibold text-[14px]'>{userDetails.email}</p>
+            <p className='font-semibold text-[14px]'>{data?.email}</p>
           </div>
           <div className='flex justify-start items-center w-full gap-3'>
             <PhoneIcon sx={{color:"gray",width:20,height:20}}/>
-            <p className='font-semibold text-[14px]'>{userDetails.phonenumber}</p>
+            <p className='font-semibold text-[14px]'>{data?.phonenumber}</p>
           </div>
         </div>
 
@@ -171,15 +152,15 @@ const MyProfile = () => {
           </div>
           <div className='w-full'>
             <p className=' font-semibold text-[12px] text-gray-500'>First name</p>
-            <p className=' font-semibold text-[14px] '>{userDetails.firstname}</p>
+            <p className=' font-semibold text-[14px] '>{data?.firstname}</p>
           </div>
           <div className='w-full'>
             <p className=' font-semibold text-[12px] text-gray-500'>Last name</p>
-            <p className=' font-semibold text-[14px]'>{userDetails.lastname}</p>
+            <p className=' font-semibold text-[14px]'>{data?.lastname}</p>
           </div>
           <div className='w-full'>
             <p className=' font-semibold text-[12px] text-gray-500'>Address</p>
-            <p className=' font-semibold text-[14px]'>{userDetails.address}</p>
+            <p className=' font-semibold text-[14px]'>{data?.address}</p>
           </div>
           
         </div>
@@ -190,7 +171,7 @@ const MyProfile = () => {
             <AddBoxIcon sx={{color:"darkblue"}}/>
           </div>
           <div className='flex gap-3 p-3 flex-wrap'>
-            {userDetails.work_areas?.map((work)=>(
+            {data?.work_areas?.map((work)=>(
             <Chip key={work} label={work} size='' variant='outlined' sx={{color:"gray"}} onDelete={()=>{}}/>
             ))}
           </div>

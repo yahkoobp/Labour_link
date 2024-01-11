@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { UserAuthContextProvider, useUserAuthContext } from '../context/userAuthContext'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { db } from '../../../firebaseConfig'
+import { doc, setDoc } from 'firebase/firestore'
 
 
 
@@ -23,7 +25,8 @@ function RegisterPage() {
     setError("")
     try {
       setLoading(true)
-      await signUp(email,password)
+      const res = await signUp(email,password)
+      await setDoc(doc(db ,'user-chats',res.user.uid),{})
       setLoading(false)
       router.replace("/profileForm")
     } catch (error) {

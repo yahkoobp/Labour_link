@@ -34,6 +34,7 @@ const PostJob = () => {
         //  end_date:endDate,
          job_poster:user.uid,
          isActive:true,
+         responses:[],
          time_stamp :new Date().toDateString()
         });
         // console.log(docRef._key.path.segments[1])
