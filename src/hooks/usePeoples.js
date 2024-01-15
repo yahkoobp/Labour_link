@@ -7,7 +7,7 @@ const fetchUsers = async () =>{
     try {
       const querySnapShot = await getDocs(collection(db , "users"));
       querySnapShot.forEach((doc)=>{
-        list.push({id: doc.id ,...doc.data()})
+        list.push(doc.data())
       })
   
       return list
@@ -18,6 +18,6 @@ const fetchUsers = async () =>{
 
  export const usePeoples = (filter) =>{
     return useQuery('peoples', fetchUsers ,{
-        cacheTime:500000 ,staleTime:50000,refetchOnMount:true,refetchOnWindowFocus:true,select:filter
+        cacheTime:500000 ,staleTime:50000,refetchOnMount:true,refetchOnWindowFocus:true,select:filter,keepPreviousData:true
     })
 }

@@ -23,5 +23,5 @@ const fetchSinglePeople = async ({queryKey}) =>{
   }
 }
  export const useSinglePeoples = (user_id) =>{
-    return useQuery(['user',user_id] ,fetchSinglePeople,{cacheTime:500000})
+    return useQuery(['user',user_id] ,fetchSinglePeople,{cacheTime:500000,keepPreviousData:true})
 }

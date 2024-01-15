@@ -3,6 +3,7 @@ import './globals.css'
 import './chat.scss'
 import { UserAuthContextProvider } from './context/userAuthContext'
 import TanStackProvider from './context/reactQueryContext'
+import { ChatContextProvider } from './context/chatContext'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -18,7 +19,9 @@ export default function RootLayout({ children }) {
     <html lang="en" >
       <TanStackProvider>
       <UserAuthContextProvider>
+      <ChatContextProvider>
       <body className={inter.className}>{children}</body>
+      </ChatContextProvider>
       </UserAuthContextProvider>
       </TanStackProvider>
     </html>

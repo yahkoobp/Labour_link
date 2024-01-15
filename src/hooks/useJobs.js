@@ -17,6 +17,6 @@ const fetchJobs = async()=>{
 
  export const useJobs = () =>{
     return useQuery('jobs', fetchJobs,{
-        cacheTime:500000 ,staleTime:50000,refetchOnMount:true,refetchOnWindowFocus:true,
+        cacheTime:500000 ,staleTime:50000,refetchOnMount:true,refetchOnWindowFocus:true,keepPreviousData:true
     })
 }

@@ -21,6 +21,6 @@ const fetchJob = async({queryKey})=>{
 
  export const useJobView = (job_id) =>{
     return useQuery(['jobView',job_id],fetchJob,{
-        cacheTime:500000 ,staleTime:50000,refetchOnMount:true,refetchOnWindowFocus:true,
+        cacheTime:500000 ,staleTime:50000,refetchOnMount:true,refetchOnWindowFocus:true,keepPreviousData:true
     })
 }

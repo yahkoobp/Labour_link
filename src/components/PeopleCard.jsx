@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import PlaceIcon from '@mui/icons-material/Place';
+import Link from 'next/link';
 
 const PeopleCard = (props) => {
   const user_data = props.user
@@ -17,7 +18,7 @@ const PeopleCard = (props) => {
                 <PlaceIcon sx={{color:"black",width:20}}/>
             <h2 className='font-semibold text-[12px] text-gray-900'>{user_data?.city?.slice(0,10)}{user_data?.city?.length>10&&"..."}</h2>
             </div>
-        <button className='px-10 py-1 border border-gray-300 font-semibold text-blue-800 rounded-md hover:scale-90 duration-500'>View</button>
+       <Link href={`/peoples/${user_data?.id}`}> <button className='px-10 py-1 border border-gray-300 font-semibold text-blue-800 rounded-md hover:scale-90 duration-500'>View</button></Link>
        
     </div>
   )

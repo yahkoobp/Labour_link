@@ -26,7 +26,7 @@ function RegisterPage() {
     try {
       setLoading(true)
       const res = await signUp(email,password)
-      await setDoc(doc(db ,'user-chats',res.user.uid),{})
+      await setDoc(doc(db ,'userChats',res.user.uid),{})
       setLoading(false)
       router.replace("/profileForm")
     } catch (error) {

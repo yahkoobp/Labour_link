@@ -121,10 +121,12 @@ const Homepage = () => {
             <ChevronRightIcon />
           </div>
           <div className="flex flex-col w-full items-start justify-center mt-3">
+            <Link href="/jobs">
             <div className="flex gap-3 items-center justify-start cursor-pointer p-2 hover:bg-gray-100 w-full">
               <SearchIcon sx={{ color: "gray", width: 18, height: 18 }} />
               <p className="text-[13px] font-semibold">Search Jobs</p>
             </div>
+            </Link>
 
             <div className="flex gap-3 items-center justify-start cursor-pointer p-2 hover:bg-gray-100 w-full">
               <WorkOutlineOutlinedIcon
@@ -137,7 +139,7 @@ const Homepage = () => {
               <BookmarkBorderOutlinedIcon
                 sx={{ color: "gray", width: 17, height: 17 }}
               />
-              <p className="text-[13px] font-semibold">Saved Jobs</p>
+             <Link href='/appliedJobs'> <p className="text-[13px] font-semibold">Applied jobs</p></Link>
             </div>
 
             <Link href="/jobPosts">
