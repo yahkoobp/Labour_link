@@ -50,7 +50,7 @@ const MyProfile = () => {
       const updateData = async(img)=>{
         setLoading(true)
         try {
-          const user_data = doc(db,"users",user.uid)
+          const user_data = doc(db,"users",user?.uid)
           const updatedData = await updateDoc(user_data ,{
             image:img
           })

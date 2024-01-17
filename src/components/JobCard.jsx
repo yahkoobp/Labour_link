@@ -45,7 +45,7 @@ const JobCard = (props) => {
                 <QuickreplyIcon sx={{width:"20px"}}/>
                 <p className='font-bold text-[12px] text-green-800'>14 Interests</p>
                 </div>
-                <p className='font-bold text-[12px] text-green-800'>{job.responses.includes(user.uid) && "Applied"}</p>
+                <p className='font-bold text-[12px] text-green-800'>{job.responses.includes(user?.uid) && "Applied"}</p>
             </div>
 
         </div>

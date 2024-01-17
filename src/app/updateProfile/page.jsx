@@ -29,7 +29,7 @@ const UpdateProfile = () => {
     const finalData = Object.fromEntries(data.entries());
     console.log({ ...finalData, work_areas: work_areas });
     try {
-      const res = await setDoc(doc(db, "users", user.uid), {
+      const res = await setDoc(doc(db, "users", user?.uid), {
         ...finalData,
         isLabour: true,
         work_areas: work_areas,

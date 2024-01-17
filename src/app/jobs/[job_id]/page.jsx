@@ -24,7 +24,7 @@ const JobView = () => {
 
       useEffect(()=>{
         if(jobDetails){
-        if(jobDetails?.responses.includes(user.uid)){
+        if(jobDetails?.responses.includes(user?.uid)){
           setIsApplied(true)
          }
       }},[jobDetails])

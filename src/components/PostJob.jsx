@@ -32,7 +32,7 @@ const PostJob = () => {
          ...finalData,
         //  start_date:startDate,
         //  end_date:endDate,
-         job_poster:user.uid,
+         job_poster:user?.uid,
          isActive:true,
          responses:[],
          selections:[],

@@ -51,7 +51,7 @@ const ApplyForm = () => {
       setLoading(true)
       const job_data = doc(db,"jobs",j_id)
       const updatedData = await updateDoc(job_data ,{
-        responses:[...responses,user.uid]
+        responses:[...responses,user?.uid]
       })
       setLoading(false)
       setToggler(!toggler)

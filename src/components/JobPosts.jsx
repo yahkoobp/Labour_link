@@ -19,7 +19,7 @@ const JobPosts = () => {
       const fetchData = async()=>{
         const jobsQuery = query(
           collection(db,"jobs"),
-          where("job_poster","==",user.uid)
+          where("job_poster","==",user?.uid)
         )
         const querySnapshot = await getDocs(jobsQuery);
         querySnapshot.forEach((doc) => {

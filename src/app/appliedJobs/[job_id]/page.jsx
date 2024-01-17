@@ -41,7 +41,7 @@ const SelectedAppliedJob = () => {
     try {
       const job_data = doc(db,"jobs",j_id)
       const updatedData = await updateDoc(job_data ,{
-        confirmations:[...confirmations,user.uid]
+        confirmations:[...confirmations,user?.uid]
       })
       setOpenDialog(false)
      console.log(job_data)

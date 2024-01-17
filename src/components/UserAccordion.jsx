@@ -39,7 +39,7 @@ const UserAccordion = (props) => {
   }
   const handleSelect = async () => {
     try {
-      // setResponses([...responses,{...finalData,user_id:user.uid}])
+      // setResponses([...responses,{...finalData,user_id:}])
       const job_data = doc(db, "jobs", j_id);
       const updatedData = await updateDoc(job_data, {
         selections: [...selections, user.id],

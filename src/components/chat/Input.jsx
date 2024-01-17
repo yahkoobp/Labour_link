@@ -65,7 +65,7 @@ const Input = () => {
       [data.chatId + ".date"]: serverTimestamp(),
     });
 
-    await updateDoc(doc(db, "userChats", data.user.uid), {
+    await updateDoc(doc(db, "userChats", data?.user?.uid), {
       [data.chatId + ".lastMessage"]: {
         text,
       },
