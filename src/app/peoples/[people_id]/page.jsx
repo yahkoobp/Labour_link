@@ -14,7 +14,7 @@ import Snackbar from '@mui/material/Snackbar';
 import { Chip } from '@mui/material';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import { usePathname, useRouter } from 'next/navigation';
-import { useSinglePeoples } from '@/hooks/useSinglePeople';
+import { useSinglePeoples } from '@/hooks/useSinglePeoples';
 import Link from 'next/link';
 import { ChatContext } from '@/app/context/chatContext';
 

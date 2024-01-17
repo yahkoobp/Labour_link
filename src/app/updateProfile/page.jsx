@@ -9,7 +9,7 @@ import { jobs, kerala_places } from "@/data";
 import { useRouter } from "next/navigation";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { db } from "../../../firebaseConfig";
-import { useSinglePeoples } from "@/hooks/useSinglePeople";
+import { useSinglePeoples } from "@/hooks/useSinglePeoples";
 
 const UpdateProfile = () => {
   const { user } = useUserAuthContext();

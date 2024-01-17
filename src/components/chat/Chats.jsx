@@ -1,7 +1,7 @@
 "use client"
 import { ChatContext } from "@/app/context/chatContext";
 import { useUserAuthContext } from "@/app/context/userAuthContext";
-import { useSinglePeoples } from "@/hooks/useSinglePeople";
+import { useSinglePeoples } from "@/hooks/useSinglePeoples";
 import { doc, onSnapshot } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { db } from "../../../firebaseConfig";

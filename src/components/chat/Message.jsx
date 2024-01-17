@@ -1,6 +1,6 @@
 import { ChatContext } from "@/app/context/chatContext";
 import { useUserAuthContext } from "@/app/context/userAuthContext";
-import { useSinglePeoples } from "@/hooks/useSinglePeople";
+import { useSinglePeoples } from "@/hooks/useSinglePeoples";
 import React, { useContext, useEffect, useRef } from "react";
 
 const Message = ({ message }) => {

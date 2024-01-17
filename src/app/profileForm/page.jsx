@@ -33,6 +33,8 @@ const ProfileForm = () => {
             image:"https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1701156585~exp=1701157185~hmac=ac68d03b1add36a89081d098324072530d782a1bd6a57a0eebb5ff7e6ae9cea8",
             isLabour:true,
             work_areas:work_areas,
+            previous_works:[],
+            ratings:[],
             timeStamp : serverTimestamp()
         })
         setLoading(false)

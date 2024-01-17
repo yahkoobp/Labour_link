@@ -17,6 +17,7 @@ import React, { useEffect, useState } from "react";
 import { useUserAuthContext } from "@/app/context/userAuthContext";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../../firebaseConfig";
+import JobSchedule from "@/components/JobSchedule";
 
 const SelectedAppliedJob = () => {
   const { user } = useUserAuthContext();
@@ -105,8 +106,8 @@ const SelectedAppliedJob = () => {
       </div>
 
       {confirmed ?
-      <div>
-          congratulations you are confirmed you job , show the job schedule here,
+      <div className="flex items-center justify-center mt-6 w-full">
+          <JobSchedule/>
       </div>
       :
       selected ? (

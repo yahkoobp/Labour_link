@@ -9,7 +9,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useUserAuthContext } from '@/app/context/userAuthContext';
 import { useJobView } from '@/hooks/useJobView';
-import { useSinglePeoples } from '@/hooks/useSinglePeople';
+import { useSinglePeoples } from '@/hooks/useSinglePeoples';
 
 const JobView = () => {
     const {user} = useUserAuthContext()
@@ -45,7 +45,7 @@ const JobView = () => {
             </div>
           <div className='flex items-center gap-2'>
             <PlaceIcon sx={{color:"green"}}/>
-            <i className='font-semibold text-[14px]'>{jobDetails?.job_location}</i>
+            <p className='font-semibold text-[14px]'>{jobDetails?.job_location}</p>
         </div>
         <div className='flex gap-2'>
             <div className='bg-green-100 w-[150px] px-2 py-1 rounded-md'>

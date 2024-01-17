@@ -1,6 +1,6 @@
 "use client"
 import { useUserAuthContext } from "@/app/context/userAuthContext"
-import { useSinglePeoples } from "@/hooks/useSinglePeople"
+import { useSinglePeoples } from "@/hooks/useSinglePeoples"
 
 
 const Navbar = () => {

@@ -519,4 +519,33 @@ export const kerala_cities = [
           "places": ["Kasaragod", "Kanhangad", "Kasargod", "Uppala", "Nileshwar", "Cheruvathur", "Trikkarippur", "Perla"]
         }
       }
+
+export const rating_questions = [
+  {
+    id:1,
+    name:"overall_performance",
+    question:"How would you evaluate the overall performance of this labour"
+  },
+  {
+    id:2,
+    name:"effectiveness",
+    question:"How effectively did this labour handle and complete assigned tasks"
+  },
+  {
+    id:3,
+    name:"punctuality",
+    question:"How was the punctuality and attendance of this labour during the work"
+  },
+  {
+    id:4,
+    name:"proffessionalism",
+    question:"How would you rate the level of professionalism displayed by this labour"
+  },
+  {
+    id:5,
+    name:"output",
+    question:"How satisfied are you with this labour's overall work quality and output"
+  },
+
+]
   

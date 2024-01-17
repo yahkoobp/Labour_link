@@ -8,7 +8,7 @@ import {
   getDoc,
 } from "firebase/firestore";
 import { useUserAuthContext } from "@/app/context/userAuthContext";
-import { useSinglePeoples } from "@/hooks/useSinglePeople";
+import { useSinglePeoples } from "@/hooks/useSinglePeoples";
 import { db } from "../../../firebaseConfig";
 import { ChatContext } from "@/app/context/chatContext";
 

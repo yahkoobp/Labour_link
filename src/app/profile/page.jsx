@@ -12,14 +12,14 @@ import ShortcutIcon from '@mui/icons-material/Shortcut';
 import CircularProgress from '@mui/material/CircularProgress';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import { Chip } from '@mui/material';
+import { Chip, Rating } from '@mui/material';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import { useUserAuthContext } from '../context/userAuthContext';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db, storage } from '../../../firebaseConfig';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { useRouter } from 'next/navigation';
-import { useSinglePeoples } from '@/hooks/useSinglePeople';
+import { useSinglePeoples } from '@/hooks/useSinglePeoples';
 import Link from 'next/link';
 
 const MyProfile = () => {
@@ -30,14 +30,21 @@ const MyProfile = () => {
   const [file , setFile] = useState("")
   const [snackbar , setSnackBar] = useState(false)
   const [loadingProgress,setLoadingProgress] = useState("")
+  const [overPerf ,setOverPerf] = useState(0)
+  const [effectiveness ,setEffectveness] = useState(0)
+  const [punctuality , setPunctuality] = useState(0)
+  const [proffessionalism , setProffessionalism] = useState(0)
+  const [output , setOutput] = useState(0)
   const router = useRouter()
   const Alert = React.forwardRef(function Alert(props, ref) {
       return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
 
     const {data} = useSinglePeoples(user?.uid)
-    
     console.log(data)
+
+    console.log(overPerf)
+    console.log(proffessionalism)
 
     useEffect(()=>{
       const updateData = async(img)=>{
@@ -95,6 +102,19 @@ const MyProfile = () => {
 
      file && uploadFile()
     },[file])
+
+    useEffect(()=>{
+          if(data){
+           let len = data?.ratings.length
+            len && data?.ratings?.map((rating)=>{
+                setOverPerf((prev)=>(prev + rating.overall_performance)/len)
+                setEffectveness((prev)=>(prev + rating.effectiveness)/len)
+                setPunctuality((prev)=>(prev + rating.punctuality)/len)
+                setProffessionalism((prev)=>(prev + rating.proffessionalism)/len)
+                setOutput((prev)=>(prev + rating.output)/len)
+            })
+          }
+    },[data])
   return (
     <div>
        <div className='h-[60px] p-3 sticky top-0 bg-white flex items-center justify-between'>
@@ -120,6 +140,29 @@ const MyProfile = () => {
         </label>
         <h1 className='font-heading text-lg'>{data?.firstname} {data?.lastname}</h1>
         <p className='text-gray-600 font-semibold text-center text-sm'>{data?.bio}</p>
+        </div>
+
+        <div className='flex flex-col items-center justify-center mt-4 rounded-md p-3 gap-4 bg-yellow-50'>
+          <div className='flex flex-col items-start justify-center w-full'>
+            <h2 className='font-semibold text-[15px] '>Overall performance</h2>
+            <Rating value={overPerf} readOnly/>
+          </div>
+          <div className='flex flex-col items-start justify-center w-full'>
+          <h2 className='font-semibold text-[15px]  '>Effectiveness</h2>
+            <Rating value={effectiveness} readOnly/>
+          </div>
+          <div className='flex flex-col items-start justify-center w-full'>
+          <h2 className='font-semibold text-[15px] '>Punctuality</h2>
+            <Rating value={punctuality} readOnly/>
+          </div>
+          <div className='flex flex-col items-start justify-center w-full'>
+          <h2 className='font-semibold text-[15px] '>Proffessionalism</h2>
+            <Rating value={proffessionalism} readOnly/>
+          </div>
+          <div className='flex flex-col items-start justify-center w-full'>
+          <h2 className='font-semibold text-[15px]  '>Output</h2>
+            <Rating value={output} readOnly/>
+          </div>
         </div>
 
         <div className='flex flex-col items-center justify-center mt-4 rounded-md p-3 gap-3 bg-green-50'>

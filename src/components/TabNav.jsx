@@ -137,7 +137,7 @@ import { useJobs } from '@/hooks/useJobs';
     <ul id="list" ref={listViewRef} className='ml-0 '>
         {filterQuery !== "" && jobs.filter((job=>job.toLowerCase().includes(filterQuery.toLocaleLowerCase()))).map((filteredItem , i)=>(
             <li key={i} onClick={()=>handleSearch(filteredItem)} className="cursor-pointer p-4 w-full font-semibold text-sm">
-                {filteredItem}
+                {filteredItem.length ? filteredItem :"Oops...this work not found" }
             </li> 
         ))}
        </ul>
@@ -146,14 +146,14 @@ import { useJobs } from '@/hooks/useJobs';
        </div>
     </div>
     <div>
-    {filterQuery!=="" && selected ? jobsByTitle.map((job)=>(
+    {filterQuery!=="" && selected ? jobsByTitle.length ?jobsByTitle.map((job)=>(
         <JobCard key={job} job={job}/>
-      )) 
+      )):<div className='flex items-center justify-center h-[300px]'><p className='font-semibold text-gray-500'>Oops....This job not found</p></div>
        :
         data?.map((job)=>(
         <JobCard key={job.job_id} job={job}/>
       ))}
-        <div id="filter" ref={filterRef} className='fixed z-50 bottom-16 left-0 w-full flex items-center 
+       {<div id="filter" ref={filterRef} className='fixed z-50 bottom-16 left-0 w-full flex items-center 
          justify-center transition-opacity ease-in-out duration-500'>
         <div className='rounded-full px-6 py-1 flex items-center justify-center gap-2 shadow-lg bg-white cursor-pointer'
         onClick={()=>setDrawerOpen(true)}>
@@ -162,6 +162,7 @@ import { useJobs } from '@/hooks/useJobs';
          <h2 className='font-heading'>Filter</h2>
          </div>
       </div>
+ }
       </div>
       
 
@@ -212,7 +213,7 @@ import { useJobs } from '@/hooks/useJobs';
  {selection ==2 &&
 <div className='px-3 py-2'>
 <FormControl required>
-          <RadioGroup name="work_time" aria-label='daily_wage' column>
+          <RadioGroup name="work_time" aria-label='daily_wage' column onChange={handleWageRadio}>
               <FormControlLabel control={<Radio size='small'onChange={handleWageRadio}/>} label="500-700" value="500-700"/>
               <FormControlLabel control={<Radio size='small'onChange={handleWageRadio}/>} label="700-1000" value="700-100"/>
               <FormControlLabel control={<Radio size='small'onChange={handleWageRadio}/>} label="1000-1200" value="1000-1200"/>

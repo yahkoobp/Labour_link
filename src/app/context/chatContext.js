@@ -6,7 +6,7 @@ import {
     useState,
   } from "react";
 import { useUserAuthContext } from "./userAuthContext";
-import { useSinglePeoples } from "@/hooks/useSinglePeople";
+import { useSinglePeoples } from "@/hooks/useSinglePeoples";
   
   export const ChatContext = createContext();
   

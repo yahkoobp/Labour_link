@@ -11,7 +11,7 @@ import {
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useUserAuthContext } from "@/app/context/userAuthContext";
-import { useSinglePeoples } from "@/hooks/useSinglePeople";
+import { useSinglePeoples } from "@/hooks/useSinglePeoples";
 import { ChatContext } from "@/app/context/chatContext";
 import { db, storage } from "../../../firebaseConfig";
 
