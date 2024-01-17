@@ -97,11 +97,7 @@ export default function Landing() {
         </div>
       </div>
       <div className="flex items-center justify-center mt-6 px-20">
-        <p className="text-[11px] text-center text-gray-500">
-          By continuing, you agree to Labourlinks's{" "}
-          <span className="font-bold text-black">Terms of Use</span> and{" "}
-          <span className="font-bold text-black">Privacy Policy</span>
-        </p>
+      <p className='text-[11px] text-center text-gray-500'>By continuing, you agree to Labourlinks's Terms of Use and Privacy Policy</p>
       </div>
 
       <div className="bg-gray-100 h-[40px] w-full flex items-center justify-center">
