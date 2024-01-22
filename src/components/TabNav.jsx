@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef, useState } from 'react'
+import React, { Suspense, useRef, useState } from 'react'
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -18,6 +18,8 @@ import JobCard from './JobCard';
 import { useUserAuthContext } from '@/app/context/userAuthContext';
 import PostJob from './PostJob';
 import { useJobs } from '@/hooks/useJobs';
+import CommittedJobs from './CommittedJobs';
+import JobCardSkeleton from './Skeletons/JobCardSkeleton';
 
 
 
@@ -31,8 +33,8 @@ import { useJobs } from '@/hooks/useJobs';
     const [cityFilter , setCityFilter] = useState("")
     const [selection , setSelection] = useState(1)
     const [filterLocation , setFilterLocation] = useState([])
-    const [filterWage , setFilterWage] = useState("")
     const [filterTime , setFilterTime] = useState("")
+    const [filterApplied , setFilterApplied] = useState(false)
     const filterRef = useRef(null)
     const filter1Ref = useRef(null)
     const filter2Ref = useRef(null)
@@ -42,24 +44,23 @@ import { useJobs } from '@/hooks/useJobs';
     const filter = filterRef.current
     const filter1 = filter1Ref.current
     const filter2 = filter2Ref.current
-    const filter3 = filter3Ref.current
     const listView = listViewRef.current
+
+    const appliedFilters = {
+      location:filterLocation,
+      time:filterTime
+    }
+
+    console.log(appliedFilters)
 
 
     if(selection ==1){
      filter1?.classList?.add("bg-gray-300")
      filter2?.classList?.remove("bg-gray-300")
-     filter3?.classList?.remove("bg-gray-300")
     }else if(selection ==2){
       filter1?.classList?.remove("bg-gray-300")
       filter2?.classList?.add("bg-gray-300")
-      filter3?.classList?.remove("bg-gray-300")
-    }else if(selection ==3){
-      filter1?.classList?.remove("bg-gray-300")
-      filter2?.classList?.remove("bg-gray-300")
-      filter3?.classList?.add("bg-gray-300")
     }
-
     const {data} = useJobs()
     console.log(data)
     
@@ -90,12 +91,20 @@ import { useJobs } from '@/hooks/useJobs';
         }
     }
 
-    const handleWageRadio = (e)=>{
-          setFilterWage(e.target.value)
-    }
-
     const handleTimeRadio = (e)=>{
       setFilterTime(e.target.value)
+    }
+
+    const handleApply = ()=>{
+      setFilterApplied(true)
+      setDrawerOpen(false)
+    }
+
+    const handleReset = () =>{
+      setFilterApplied(false)
+      setFilterLocation([])
+      setFilterTime("")
+      setDrawerOpen(false)
     }
     return (
       <div className='' id="container" ref={containerRef}>
@@ -146,12 +155,20 @@ import { useJobs } from '@/hooks/useJobs';
        </div>
     </div>
     <div>
-    {filterQuery!=="" && selected ? jobsByTitle.length ?jobsByTitle.map((job)=>(
+    {filterApplied ? data?.filter((job)=>appliedFilters?.location?.includes(job?.job_location) && (appliedFilters.time ==="" || appliedFilters.time === job?.work_time)).map((filteredJob)=>(
+      <Suspense fallback={<JobCardSkeleton/>}>
+      <JobCard key={filteredJob?.id} job={filteredJob}/>
+      </Suspense>
+
+    )) :
+    filterQuery!=="" && selected ? jobsByTitle.length ?jobsByTitle.map((job)=>(
         <JobCard key={job} job={job}/>
       )):<div className='flex items-center justify-center h-[300px]'><p className='font-semibold text-gray-500'>Oops....This job not found</p></div>
        :
         data?.map((job)=>(
-        <JobCard key={job.job_id} job={job}/>
+          <Suspense fallback={<p>Loading........</p>}>
+          <JobCard key={job.job_id} job={job}/>
+        </Suspense>
       ))}
        {<div id="filter" ref={filterRef} className='fixed z-50 bottom-16 left-0 w-full flex items-center 
          justify-center transition-opacity ease-in-out duration-500'>
@@ -159,7 +176,7 @@ import { useJobs } from '@/hooks/useJobs';
         onClick={()=>setDrawerOpen(true)}>
           <div className='h-[7px] w-[7px] bg-green-600 rounded-full'></div>
           <TuneIcon/>
-         <h2 className='font-heading'>Filter</h2>
+         <h2 className='font-bold text-[15px]'>Filter</h2>
          </div>
       </div>
  }
@@ -168,7 +185,7 @@ import { useJobs } from '@/hooks/useJobs';
 
           </TabPanel>
           <TabPanel value="2">
-            item2
+            <CommittedJobs/>
           </TabPanel>
           <TabPanel value="3">
             <PostJob/>
@@ -182,8 +199,10 @@ import { useJobs } from '@/hooks/useJobs';
 
       <Drawer anchor="bottom" open={drawerOpen} onClose={()=>setDrawerOpen(false)} sx={{borderTopLeftRadius:"10px"}}>
         <div className='flex items-center justify-between border border-b-gray-200 px-3 py-4 rounded-t-lg'>
-          <h2 className='font-heading'>Filter</h2>
-          <button className='font-heading text-white bg-blue-500 px-4 py-2 rounded-md'>Apply</button>
+          <h2 className='font-bold'>Filter</h2>
+          {filterApplied ? <button className='font-bold  text-white bg-blue-500 px-4 py-2 rounded-md' onClick={handleReset}>Reset</button>:
+          <button className='font-bold  text-white bg-blue-500 px-4 py-2 rounded-md' onClick={handleApply}>Apply</button>
+          }
         </div>
        <div className='rounded-tl-lg flex h-[400px]'>
         <div  className='flex flex-col justify-start item-center bg-gray-100 '>
@@ -191,16 +210,13 @@ import { useJobs } from '@/hooks/useJobs';
             <h2 className='font-semibold'>Location</h2>
           </div>
           <div id="filter2" ref={filter2Ref} className='px-4 py-3 bg-gray-100 cursor-pointer' onClick={()=>setSelection(2)}>
-            <h2 className='font-semibold'>Daily wage</h2>
-          </div>
-          <div id="filter3" ref={filter3Ref} className='px-4 py-3 bg-gray-100 cursor-pointer' onClick={()=>setSelection(3)}>
             <h2 className='font-semibold'>Time of work</h2>
           </div>
         </div>
         
         { selection==1 &&
         <div className="flex flex-col item-center justify-start overflow-y-auto flex-1 p-3 relative">
-          <input type="text" value={cityFilter} className='bg-gray-100 focus:outline-none border border-gray-200 px-6 py-2 rounded-full ' 
+          <input type="text" value={cityFilter} className='bg-teal-100 focus:outline-none border border-blue-200 px-6 py-2 rounded-full ' 
           placeholder='Search by Location' onChange={(e)=>{setCityFilter(e.target.value)}}/>
         <FormGroup>
           { kerala_cities.filter((city=>city.toLowerCase().includes(cityFilter.toLocaleLowerCase()))).map((city)=>(
@@ -210,20 +226,9 @@ import { useJobs } from '@/hooks/useJobs';
        </FormGroup>
         </div>
  }
- {selection ==2 &&
-<div className='px-3 py-2'>
-<FormControl required>
-          <RadioGroup name="work_time" aria-label='daily_wage' column onChange={handleWageRadio}>
-              <FormControlLabel control={<Radio size='small'onChange={handleWageRadio}/>} label="500-700" value="500-700"/>
-              <FormControlLabel control={<Radio size='small'onChange={handleWageRadio}/>} label="700-1000" value="700-100"/>
-              <FormControlLabel control={<Radio size='small'onChange={handleWageRadio}/>} label="1000-1200" value="1000-1200"/>
-              <FormControlLabel control={<Radio size='small'onChange={handleWageRadio}/>} label="1200+" value="1200+"/>
-          </RadioGroup>
-      </FormControl>
-      </div>
- }
+ 
  {
-  selection ==3 &&
+  selection ==2 &&
   <div className='px-3 py-2'>
   <FormControl required>
             <RadioGroup name="work_time" aria-label='job_time' column>

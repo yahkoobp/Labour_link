@@ -42,10 +42,6 @@ const MyProfile = () => {
 
     const {data} = useSinglePeoples(user?.uid)
     console.log(data)
-
-    console.log(overPerf)
-    console.log(proffessionalism)
-
     useEffect(()=>{
       const updateData = async(img)=>{
         setLoading(true)
@@ -142,29 +138,6 @@ const MyProfile = () => {
         <p className='text-gray-600 font-semibold text-center text-sm'>{data?.bio}</p>
         </div>
 
-        <div className='flex flex-col items-center justify-center mt-4 rounded-md p-3 gap-4 bg-yellow-50'>
-          <div className='flex flex-col items-start justify-center w-full'>
-            <h2 className='font-semibold text-[15px] '>Overall performance</h2>
-            <Rating value={overPerf} readOnly/>
-          </div>
-          <div className='flex flex-col items-start justify-center w-full'>
-          <h2 className='font-semibold text-[15px]  '>Effectiveness</h2>
-            <Rating value={effectiveness} readOnly/>
-          </div>
-          <div className='flex flex-col items-start justify-center w-full'>
-          <h2 className='font-semibold text-[15px] '>Punctuality</h2>
-            <Rating value={punctuality} readOnly/>
-          </div>
-          <div className='flex flex-col items-start justify-center w-full'>
-          <h2 className='font-semibold text-[15px] '>Proffessionalism</h2>
-            <Rating value={proffessionalism} readOnly/>
-          </div>
-          <div className='flex flex-col items-start justify-center w-full'>
-          <h2 className='font-semibold text-[15px]  '>Output</h2>
-            <Rating value={output} readOnly/>
-          </div>
-        </div>
-
         <div className='flex flex-col items-center justify-center mt-4 rounded-md p-3 gap-3 bg-green-50'>
           <div className='flex items-center justify-between w-full'>
             <h2 className='font-bold text-md '>Basic details</h2>
@@ -205,7 +178,6 @@ const MyProfile = () => {
             <p className=' font-semibold text-[12px] text-gray-500'>Address</p>
             <p className=' font-semibold text-[14px]'>{data?.address}</p>
           </div>
-          
         </div>
 
         <div className='flex flex-col items-start justify-center mt-4 rounded-md p-3 gap-3 bg-yellow-50'>
@@ -217,6 +189,29 @@ const MyProfile = () => {
             {data?.work_areas?.map((work)=>(
             <Chip key={work} label={work} size='' variant='outlined' sx={{color:"gray"}} onDelete={()=>{}}/>
             ))}
+          </div>
+        </div>
+
+        <div className='flex flex-col items-center justify-center mt-4 rounded-md p-3 gap-4 bg-yellow-50'>
+          <div className='flex flex-col items-start justify-center w-full'>
+            <h2 className='font-semibold text-[15px] '>Overall performance</h2>
+            <Rating value={overPerf} readOnly/>
+          </div>
+          <div className='flex flex-col items-start justify-center w-full'>
+          <h2 className='font-semibold text-[15px]  '>Effectiveness</h2>
+            <Rating value={effectiveness} readOnly/>
+          </div>
+          <div className='flex flex-col items-start justify-center w-full'>
+          <h2 className='font-semibold text-[15px] '>Punctuality</h2>
+            <Rating value={punctuality} readOnly/>
+          </div>
+          <div className='flex flex-col items-start justify-center w-full'>
+          <h2 className='font-semibold text-[15px] '>Proffessionalism</h2>
+            <Rating value={proffessionalism} readOnly/>
+          </div>
+          <div className='flex flex-col items-start justify-center w-full'>
+          <h2 className='font-semibold text-[15px]  '>Output</h2>
+            <Rating value={output} readOnly/>
           </div>
         </div>
 

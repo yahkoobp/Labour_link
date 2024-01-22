@@ -16,6 +16,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import AllInboxIcon from "@mui/icons-material/AllInbox";
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -39,9 +40,12 @@ const Homepage = () => {
               setDrawerOpen(true);
             }}
           />
+          <div className="flex items-center justify-center gap-2">
+          <NotificationsIcon sx={{ color: "white", margin: 1 }} />
           <Link href="/chats">
             <ChatIcon sx={{ color: "white", margin: 1 }} />
           </Link>
+          </div>
         </div>
         <Paper
           component="form"
@@ -69,8 +73,8 @@ const Homepage = () => {
       </div>
       <div className="p-6">
         <div className="flex items-center justify-between">
-          <h2 className="font-heading">Suggested Jobs(5)</h2>
-          <h2 className="font-heading text-blue-800 cursor-pointer">
+          <h2 className="font-bold text-[14px]">Suggested Jobs(5)</h2>
+          <h2 className="font-bold text-[14px] text-blue-800 cursor-pointer">
             View all jobs
           </h2>
         </div>
@@ -82,8 +86,8 @@ const Homepage = () => {
         </div>
       </div>
 
-      <div className="p-6">
-        <h2 className="font-heading">Peoples you may know(5)</h2>
+      <div className="px-6 py-1">
+        <h2 className="font-bold text-[14px]">Peoples you may know(5)</h2>
         <div className="flex gap-2 overflow-x-auto no-scrollbar mt-2">
           <HomePeopleCard />
           <HomePeopleCard />
@@ -121,12 +125,11 @@ const Homepage = () => {
             <ChevronRightIcon />
           </div>
           <div className="flex flex-col w-full items-start justify-center mt-3">
-            <Link href="/jobs">
+           
             <div className="flex gap-3 items-center justify-start cursor-pointer p-2 hover:bg-gray-100 w-full">
               <SearchIcon sx={{ color: "gray", width: 18, height: 18 }} />
-              <p className="text-[13px] font-semibold">Search Jobs</p>
+              <Link href="/jobs"> <p className="text-[13px] font-semibold">Search Jobs</p> </Link>
             </div>
-            </Link>
 
             <div className="flex gap-3 items-center justify-start cursor-pointer p-2 hover:bg-gray-100 w-full">
               <WorkOutlineOutlinedIcon
@@ -142,13 +145,12 @@ const Homepage = () => {
              <Link href='/appliedJobs'> <p className="text-[13px] font-semibold">Applied jobs</p></Link>
             </div>
 
-            <Link href="/jobPosts">
-              {" "}
+            
               <div className="flex gap-3 items-center justify-start cursor-pointer p-2 hover:bg-gray-100 w-full">
                 <AllInboxIcon sx={{ color: "gray", width: 17, height: 17 }} />
-                <p className="text-[13px] font-semibold">My job posts</p>
+                <Link href="/jobPosts"> <p className="text-[13px] font-semibold">My job posts</p></Link>
               </div>
-            </Link>
+            
 
             <div className="flex gap-3 items-center justify-start cursor-pointer p-2 hover:bg-gray-100 w-full">
               <SettingsOutlinedIcon

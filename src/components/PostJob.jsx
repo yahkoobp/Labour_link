@@ -22,7 +22,10 @@ const PostJob = () => {
     const [startDate , setStartDate] = useState(null)
     const [endDate , setEndDate] = useState(null)
 
+    
+
     const handleSubmit = async(e)=>{
+      
     e.preventDefault()
       const data = new FormData(e.target)
       const finalData = Object.fromEntries(data.entries())
@@ -30,8 +33,8 @@ const PostJob = () => {
         setLoading(true)
         const docRef = await addDoc(collection(db, "jobs"), {
          ...finalData,
-        //  start_date:startDate,
-        //  end_date:endDate,
+         start_date:startDate?.$d,
+         end_date:endDate?.$d,
          job_poster:user?.uid,
          isActive:true,
          responses:[],

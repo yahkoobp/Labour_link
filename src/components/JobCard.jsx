@@ -1,23 +1,25 @@
 'use client'
-import React, { useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import WorkIcon from '@mui/icons-material/Work';
 import PlaceIcon from '@mui/icons-material/Place';
 import QuickreplyIcon from '@mui/icons-material/Quickreply';
 import { Fade } from '@mui/material';
 import Link from 'next/link';
 import { useUserAuthContext } from '@/app/context/userAuthContext';
+import JobCardSkeleton from './Skeletons/JobCardSkeleton';
 
 const JobCard = (props) => {
   const {user} = useUserAuthContext()
   const job = props.job
     const j_id = props.job.job_id
   return (
+    <Suspense fallback={<JobCardSkeleton/>}>
     <div className='rounded-md'>
       <Link href={`/jobs/${j_id}`}>
         <div className='flex flex-col shadow-md mt-2 rounded-md p-6 gap-3 border border-gray-200'>
             <div className='flex gap-2 items-center'>
                 <WorkIcon sx={{color:"black",width:20,height:20}}/>
-            <h1 className='font-heading text-md'>{job.job_title}</h1>
+            <h1 className='font-bold text-[15px]'>{job.job_title}</h1>
             </div>
             <div className='flex gap-2'>
                 <PlaceIcon sx={{color:"black",width:20,height:20}}/>
@@ -51,6 +53,7 @@ const JobCard = (props) => {
         </div>
         </Link>
     </div>
+    </Suspense>
   )
 }
 

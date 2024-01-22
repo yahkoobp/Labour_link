@@ -4,7 +4,7 @@ const JobSchedule = () => {
   return (
     <div className='flex flex-col items-center justify-center gap-4 w-full'>
           <h1 className='font-semibold text-md text-gray-800'>Work Schedule</h1>
-          <div className='flex flex-col items-center justify-center gap-2 w-full p-5 '>
+          {/* <div className='flex flex-col items-center justify-center gap-2 w-full p-5 '>
               <div className='grid grid-cols-3 gap-8 text-gray-600 '>
                  <h2 className='font-semibold text-[14px]'>Work type</h2>
                  <span className='text-center'>:</span>
@@ -50,7 +50,35 @@ const JobSchedule = () => {
                  <span className='text-center'>:</span>
                  <p className='text-[14px]'>Upcoming</p>
               </div>
-          </div>
+          </div> */}
+
+         <div className='flex items-center justify-center font-semibold text-[14px]'>
+            <div className='flex flex-col items-start justify-start border-r border-r-gray-200 p-4'>
+               <p className='p-1'>Work title</p>
+               <p className='p-1'>Work location</p>
+               <p className='p-1'>Address</p>
+               <p className='p-1'>Start date</p>
+               <p className='p-1'>End date</p>
+               <p className='p-1'>Time</p>
+               <p className='p-1'>Labourer</p>
+               <p className='p-1'>Labourer address</p>
+               <p className='p-1'>Labourer Mob</p>
+               <p className='p-1'>Work status</p>
+               
+            </div>
+            <div className='flex flex-col items-start justify-start p-4'>
+                <p className='p-1'>Carpenter</p>
+                <p className='p-1'>Perinthalmanna</p>
+                <p className='p-1'>Pulikkal , elamkulam perumpara 678654</p>
+                <p className='p-1'>10 /10/2024</p>
+                <p className='p-1'>12/10/2024</p>
+                <p className='p-1'>10.am to 3.pm</p>
+                <p className='p-1'>Suhail M</p>
+                <p className='p-1'>Pulikkal(h),elamkilam , prumpara 876543</p>
+                <p className='p-1'>987654311</p>
+                <p className='p-1'>Upcoming</p>
+            </div>
+         </div>
     </div>
   )
 }

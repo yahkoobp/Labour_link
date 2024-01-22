@@ -6,12 +6,12 @@ const HomePeopleCard = (props) => {
 //   const user_data = props.user
   return (
    
-        <div className='flex flex-col items-center justify-center  gap-1 p-2 border border-gray-200 bg-white rounded-md h-[180px]'>
+        <div className='flex flex-col items-center justify-center  gap-1 p-2 border border-blue-200 bg-white rounded-lg h-[180px]'>
         <div className=' w-[40px] h-[40px] rounded-full'>
             <img src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1701156585~exp=1701157185~hmac=ac68d03b1add36a89081d098324072530d782a1bd6a57a0eebb5ff7e6ae9cea8" className='w-full h-full rounded-full object-cover' alt="" />
         </div>
-        <h2 className='font-heading text-[12px]'>Yahkoob P</h2>
-        <p className='text-[10px] font-semibold text-gray-500'>Carpenter</p>
+        <h2 className='font-bold text-[12px]'>Yahkoob P</h2>
+        <p className='text-[10px] font-semibold text-gray-600'>Carpenter</p>
         
         <div className='flex gap-1 px-2 items-center justify-center rounded-md'>
                 <PlaceIcon sx={{color:"black",width:15}}/>

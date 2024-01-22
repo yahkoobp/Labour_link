@@ -31,11 +31,11 @@ const BottomTab = (props) => {
       }
   }
   return (
-  <BottomNavigation sx={{width:'100%' , position:"absolute" , bottom:0 , backgroundColor:"white"}} value={value} onChange={handleChange} showLabels>
-     <BottomNavigationAction label="Home" icon={<HomeRoundedIcon/>}/>
-     <BottomNavigationAction label="Jobs" icon={<HomeRepairServiceRoundedIcon/>}/>
-     <BottomNavigationAction label="Peoples" icon={<PeopleAltRoundedIcon/>}/>
-     <BottomNavigationAction label="My Profile" icon={<PersonIcon/>}/>
+  <BottomNavigation sx={{width:'100%' , position:"absolute" , bottom:0 , backgroundColor:"white",height:50}} value={value} onChange={handleChange} showLabels>
+     <BottomNavigationAction label="Home" icon={<HomeRoundedIcon sx={{width:20 , height:20}}/>}/>
+     <BottomNavigationAction label="Jobs" icon={<HomeRepairServiceRoundedIcon sx={{width:20 , height:20}}/>}/>
+     <BottomNavigationAction label="Peoples" icon={<PeopleAltRoundedIcon sx={{width:20 , height:20}}/>}/>
+     <BottomNavigationAction label="My Profile" icon={<PersonIcon sx={{width:20 , height:20}}/>}/>
   </BottomNavigation>
    )
 }

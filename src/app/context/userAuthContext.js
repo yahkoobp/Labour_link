@@ -22,10 +22,10 @@ export function UserAuthContextProvider ({children}){
       }
 
       useEffect(()=>{
-
         if (typeof window !== 'undefined' && localStorage.getItem('user')){
         const stored_user = JSON.parse(localStorage.getItem('user'));
         setUser(stored_user)
+        }
         const unsubscribe = onAuthStateChanged(auth , (currentUser) =>{
          setUser(currentUser)
          localStorage.setItem("user",JSON.stringify(currentUser))
@@ -33,7 +33,7 @@ export function UserAuthContextProvider ({children}){
        return ()=>{
         unsubscribe()
        }
-      }},[])
+      },[])
       return <userAuthContext.Provider value ={{user ,signUp ,login ,logout} }>
         {children}
       </userAuthContext.Provider>

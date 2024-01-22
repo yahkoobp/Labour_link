@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { useUserAuthContext } from '@/app/context/userAuthContext';
 import { useJobView } from '@/hooks/useJobView';
 import { useSinglePeoples } from '@/hooks/useSinglePeoples';
+import MoreJobs from '@/components/MoreJobs';
 
 const JobView = () => {
     const {user} = useUserAuthContext()
@@ -21,6 +22,10 @@ const JobView = () => {
       const {data:jobDetails} = useJobView(job_id)
       const job_poster_id = jobDetails?.job_poster
       const {data:jobPoster} = useSinglePeoples(job_poster_id)
+
+      const startDate = jobDetails?.start_date?.toDate().toString().split(" ").slice(0,4).join(" ")
+      const endDate = jobDetails?.end_date?.toDate().toString().split(" ").slice(0,4).join(" ")
+      console.log(startDate)
 
       useEffect(()=>{
         if(jobDetails){
@@ -39,19 +44,22 @@ const JobView = () => {
             }} sx={{color:'gray',cursor:"pointer"}}/>
         </div>
         <div className='flex flex-col gap-3 mt-4 p-5 shadow-sm'>
-        <div className='flex gap-2'>
+        <div className='flex gap-2 items-center'>
                 <WorkIcon sx={{color:"teal"}}/>
-            <h1 className='font-heading text-lg'>{jobDetails?.job_title}</h1>
+            <h1 className='font-semibold text-[15px]'>{jobDetails?.job_title}</h1>
             </div>
           <div className='flex items-center gap-2'>
             <PlaceIcon sx={{color:"green"}}/>
             <p className='font-semibold text-[14px]'>{jobDetails?.job_location}</p>
         </div>
         <div className='flex gap-2'>
-            <div className='bg-green-100 w-[150px] px-2 py-1 rounded-md'>
+            <div className='bg-green-100 w-[150px] px-2 py-1 rounded-md flex items-center justify-center'>
                <h3 className='text-green-800 font-bold text-[12px]'>Rs {jobDetails?.daily_wage} / day</h3>
             </div>
-            <div className='bg-gray-200 w-[150px] px-2 py-1 rounded-md'>
+            <div className='bg-green-100 w-[250px] px-2 py-1 rounded-md flex items-center justify-center'>
+               <h3 className='text-green-800 font-bold text-[12px]'>{startDate} to {endDate}</h3>
+            </div>
+            <div className='bg-gray-200 w-[150px] px-2 py-1 rounded-md flex items-center justify-center'>
                <h3 className='text-green-800 font-bold text-[12px]'>{jobDetails?.work_time} time</h3>
             </div>
             </div>
@@ -100,50 +108,16 @@ const JobView = () => {
         <div className='flex flex-col'>
        <p className='font-semibold'>More related jobs</p>
        </div>
-       <div className='flex flex-col gap-1 px-3 py-2 shadow-sm'>
-        <div className='flex gap-2'>
-                <WorkIcon sx={{color:"teal"}}/>
-            <h1 className='text-md'>Carpenter</h1>
-            </div>
-          <div className='flex items-center gap-2'>
-            <PlaceIcon sx={{color:"green"}}/>
-            <i className='font-semibold text-[14px]'>Perinthalmanna</i>
-        </div>
-        <div className='flex gap-2 justify-between items-center'>
-                <p className='fonr-semibold text-gray-500 text-[14px]'>Posted on 10/10/2023</p>
-                <p className='font-bold text-[12px] text-green-900'>Active now</p>
-            </div>
-    </div>
-
-    <div className='flex flex-col gap-1 px-3 py-2 shadow-sm'>
-        <div className='flex gap-2'>
-                <WorkIcon sx={{color:"teal"}}/>
-            <h1 className='text-md'>Carpenter</h1>
-            </div>
-          <div className='flex items-center gap-2'>
-            <PlaceIcon sx={{color:"green"}}/>
-            <i className='font-semibold text-[14px]'>Perinthalmanna</i>
-        </div>
-        <div className='flex gap-2 justify-between items-center'>
-                <p className='fonr-semibold text-gray-500 text-[14px]'>Posted on 10/10/2023</p>
-                <p className='font-bold text-[12px] text-green-900'>Active now</p>
-            </div>
-    </div>
-
-    <div className='flex flex-col gap-1 px-3 py-2 shadow-sm'>
-        <div className='flex gap-2'>
-                <WorkIcon sx={{color:"teal"}}/>
-            <h1 className='text-md'>Carpenter</h1>
-            </div>
-          <div className='flex items-center gap-2'>
-            <PlaceIcon sx={{color:"green"}}/>
-            <i className='font-semibold text-[14px]'>Perinthalmanna</i>
-        </div>
-        <div className='flex gap-2 justify-between items-center'>
-                <p className='fonr-semibold text-gray-500 text-[14px]'>Posted on 10/10/2023</p>
-                <p className='font-bold text-[12px] text-green-900'>Active now</p>
-            </div>
-    </div>
+       <div>
+        <MoreJobs/>
+        <MoreJobs/>
+        <MoreJobs/>
+        <MoreJobs/>
+        <MoreJobs/>
+        <MoreJobs/>
+        <MoreJobs/>
+        
+       </div>
        
     </div>
     <div className='px-5 flex items-start justify-center gap-2 sticky bottom-0 left-0 mt-2 w-full'>
