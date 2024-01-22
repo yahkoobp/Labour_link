@@ -156,19 +156,14 @@ import JobCardSkeleton from './Skeletons/JobCardSkeleton';
     </div>
     <div>
     {filterApplied ? data?.filter((job)=>appliedFilters?.location?.includes(job?.job_location) && (appliedFilters.time ==="" || appliedFilters.time === job?.work_time)).map((filteredJob)=>(
-      <Suspense fallback={<JobCardSkeleton/>}>
       <JobCard key={filteredJob?.id} job={filteredJob}/>
-      </Suspense>
-
     )) :
     filterQuery!=="" && selected ? jobsByTitle.length ?jobsByTitle.map((job)=>(
         <JobCard key={job} job={job}/>
       )):<div className='flex items-center justify-center h-[300px]'><p className='font-semibold text-gray-500'>Oops....This job not found</p></div>
        :
         data?.map((job)=>(
-          <Suspense fallback={<p>Loading........</p>}>
           <JobCard key={job.job_id} job={job}/>
-        </Suspense>
       ))}
        {<div id="filter" ref={filterRef} className='fixed z-50 bottom-16 left-0 w-full flex items-center 
          justify-center transition-opacity ease-in-out duration-500'>

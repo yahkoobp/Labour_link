@@ -35,9 +35,7 @@ const Peoples = () => {
         <div className='flex flex-wrap gap-3 items-center justify-start md:justify-center bg-gray-50 w-full'>
          {
           data?.map((user)=>(
-            <Suspense fallback={<p>Loading...</p>}>
             <PeopleCard key={user.id} user={user}/>
-            </Suspense>
           ))
          }
          </div>

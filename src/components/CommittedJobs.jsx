@@ -52,7 +52,7 @@ const CommittedJobs = () => {
     <div>
       {committedJobs?.length ?
       committedJobs?.map((job)=>(
-        <Accordion>
+        <Accordion key={job?.id}>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
           aria-controls="panel2-content"
@@ -65,7 +65,7 @@ const CommittedJobs = () => {
         </AccordionDetails>
       </Accordion>
       )):
-      <div>You don't have any committed jobs</div>
+      <div><p>You don't have any committed jobs</p></div>
             
 }
     </div>
