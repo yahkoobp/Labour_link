@@ -154,7 +154,7 @@ import JobCardSkeleton from './Skeletons/JobCardSkeleton';
        </div>
        </div>
     </div>
-    <div>
+    <div className='md:grid md:grid-cols-3 md:gap-4'>
     {filterApplied ? data?.filter((job)=>appliedFilters?.location?.includes(job?.job_location) && (appliedFilters.time ==="" || appliedFilters.time === job?.work_time)).map((filteredJob)=>(
       <JobCard key={filteredJob?.id} job={filteredJob}/>
     )) :

@@ -17,11 +17,13 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useSinglePeoples } from '@/hooks/useSinglePeoples';
 import Link from 'next/link';
 import { ChatContext } from '@/app/context/chatContext';
+import Backdrop from '@mui/material/Backdrop';
 
 const Singlepeople = () => {
   // const [userDetails , setUserDetails] = useState({})
   const pathname = usePathname()
   const user_id = pathname.split('/')[2]
+  const [openPic , setOpenPic] = useState(false)
   console.log(user_id)
   const router = useRouter()
   const {data} = useSinglePeoples(user_id)
@@ -34,6 +36,13 @@ const Singlepeople = () => {
       // setShowSideBar(false)
       router.push('/chats')
   }
+
+  const handleProfilePic = () =>{
+      setOpenPic(true)
+  }
+  const handleCloseBackdrop = () =>{
+      setOpenPic(false)
+  }
   return (
     <div>
        <div className='h-[60px] p-3 sticky top-0 bg-white flex items-center justify-between'>
@@ -41,16 +50,16 @@ const Singlepeople = () => {
                 e.preventDefault()
                 router.back()
             }} sx={{color:'gray',cursor:"pointer"}}/>
-           <Link href='/updateProfile'><EditIcon sx={{color:"darkblue"}}/></Link>
         </div>
         <div className='flex flex-col p-4'>
         <div className='flex flex-col gap-2 items-center justify-center p-3 w-full'>
         
-        <div className=' w-[60px] h-[60px] rounded-full bg-gray-200 flex items-center justify-center border border-gray-300 cursor-pointer'>
+        <div className=' w-[60px] h-[60px] rounded-full bg-gray-200 flex items-center justify-center border border-gray-300 cursor-pointer'
+        onClick={handleProfilePic}>
             <img src={data?.image}
              className='w-full h-full rounded-full object-cover' alt="bdhbhdbh" />
         </div>
-        <h1 className='font-heading text-lg'>{data?.firstname} {data?.lastname}</h1>
+        <h1 className='font-semibold text-[18px]'>{data?.firstname} {data?.lastname}</h1>
         <p className='text-gray-600 font-semibold text-center text-sm'>{data?.bio}</p>
         <button onClick={handleChatUser} className='bg-teal-700 text-white font-semibold px-6 py-1 rounded-md'>Message</button>
         </div>
@@ -58,7 +67,6 @@ const Singlepeople = () => {
         <div className='flex flex-col items-center justify-center mt-4 rounded-md p-3 gap-3 bg-green-50'>
           <div className='flex items-center justify-between w-full'>
             <h2 className='font-bold text-md '>Basic details</h2>
-            <EditIcon sx={{color:"darkblue"}}/>
           </div>
           <div className='flex justify-start items-center w-full gap-3'>
             <WorkIcon sx={{color:"gray",width:20,height:20}}/>
@@ -81,7 +89,6 @@ const Singlepeople = () => {
         <div className='flex flex-col items-center justify-center mt-4 rounded-md p-3 gap-3 border border-gray-200'>
           <div className='flex items-center justify-between w-full'>
             <h2 className='font-bold text-md '>Personal details</h2>
-            <EditIcon sx={{color:"darkblue"}}/>
           </div>
           <div className='w-full'>
             <p className=' font-semibold text-[12px] text-gray-500'>First name</p>
@@ -101,7 +108,6 @@ const Singlepeople = () => {
         <div className='flex flex-col items-start justify-center mt-4 rounded-md p-3 gap-3 bg-yellow-50'>
           <div className='flex items-center justify-between w-full'>
             <h2 className='font-bold text-md '>Work areas</h2>
-            <AddBoxIcon sx={{color:"darkblue"}}/>
           </div>
           <div className='flex gap-3 p-3 flex-wrap'>
             {data?.work_areas?.map((work)=>(
@@ -119,6 +125,19 @@ const Singlepeople = () => {
          
         </div>
     </div>
+
+    <Backdrop
+        sx={{ color: '#f8f0f0', zIndex: (theme) => theme.zIndex.drawer + 1 ,fontWeight:"bold",backgroundColor:"black"}}
+        open={openPic}
+        onClick={handleCloseBackdrop}
+        
+        
+      > <div className='flex flex-col items-center justify-center gap-4'>
+        <div className='w-[300px] h-[300px] rounded-full'>
+        <img src={data?.image} className='w-full h-full object-cover rounded-full'/>
+        </div>
+        </div>
+      </Backdrop>
     </div>
   )
 }

@@ -64,7 +64,7 @@ const JobView = () => {
             </div>
             </div>
         <div className='flex gap-2 justify-between items-center'>
-                <p className='fonr-bold text-gray-500 text-[13px]'>Posted on {jobDetails?.time_stamp}</p>
+                <p className='font-bold text-blue-900 text-[13px]'>Posted on {jobDetails?.time_stamp}</p>
                 <p className='font-bold text-[12px] text-green-900'>Active now</p>
             </div>
     </div>

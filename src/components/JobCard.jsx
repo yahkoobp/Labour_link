@@ -18,11 +18,11 @@ const JobCard = (props) => {
       <Link href={`/jobs/${j_id}`}>
         <div className='flex flex-col shadow-md mt-2 rounded-md p-6 gap-3 border border-gray-200'>
             <div className='flex gap-2 items-center'>
-                <WorkIcon sx={{color:"black",width:20,height:20}}/>
+                <WorkIcon sx={{color:"teal",width:20,height:20}}/>
             <h1 className='font-bold text-[15px]'>{job.job_title}</h1>
             </div>
             <div className='flex gap-2'>
-                <PlaceIcon sx={{color:"black",width:20,height:20}}/>
+                <PlaceIcon sx={{color:"teal",width:20,height:20}}/>
             <h2 className='font-semibold text-sm text-gray-500'>{job.job_location}</h2>
             </div>
 
@@ -44,7 +44,7 @@ const JobCard = (props) => {
             </div>
             <div className='flex gap-2 justify-between items-center'>
               <div className='flex gap-2 justify-start items-center'>
-                <QuickreplyIcon sx={{width:"20px"}}/>
+                <QuickreplyIcon sx={{width:"20px",color:"teal"}}/>
                 <p className='font-bold text-[12px] text-green-800'>14 Interests</p>
                 </div>
                 <p className='font-bold text-[12px] text-green-800'>{job.responses.includes(user?.uid) && "Applied"}</p>

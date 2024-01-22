@@ -31,8 +31,8 @@ const Peoples = () => {
         <input type="text" placeholder='Search peoples...' 
         className='bg-gray-100 border-none focus:outline-none focus:border-gray-300 p-3 w-full rounded-md'/>
        </div>
-       <div className='flex items-center justify-center w-full px-6 py-2'>
-        <div className='flex flex-wrap gap-3 items-center justify-start md:justify-center bg-gray-50 w-full'>
+       <div className='flex items-center justify-center w-full p-2'>
+        <div className='grid grid-cols-2 gap-3 md:flex md:flex-wrap md:justify-center md:items-center bg-gray-50 w-full'>
          {
           data?.map((user)=>(
             <PeopleCard key={user.id} user={user}/>

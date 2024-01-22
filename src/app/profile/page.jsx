@@ -134,7 +134,7 @@ const MyProfile = () => {
           }
         </div>
         </label>
-        <h1 className='font-heading text-lg'>{data?.firstname} {data?.lastname}</h1>
+        <h1 className='font-semibold text-[18px]'>{data?.firstname} {data?.lastname}</h1>
         <p className='text-gray-600 font-semibold text-center text-sm'>{data?.bio}</p>
         </div>
 
