@@ -65,7 +65,7 @@ const CommittedJobs = () => {
         </AccordionDetails>
       </Accordion>
       )):
-      <div><p>You don't have any committed jobs</p></div>
+      <div><p>You don&apos;t have any committed jobs</p></div>
             
 }
     </div>
