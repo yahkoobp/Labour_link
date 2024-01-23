@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useUserAuthContext } from "../context/userAuthContext";
 import BottomTab from "@/components/BottomTab";
 import HomeJobCard from "@/components/HomeJobCard";
@@ -19,6 +19,9 @@ import AllInboxIcon from "@mui/icons-material/AllInbox";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { registerServiceWorker } from "../utils/serviceWorker";
+import NotificationIcon from "@/components/NotificationIcon";
+import { getCurrentPushSubscription, sendPushSubscriptionToServer } from "@/notifications/PushService";
 
 const Homepage = () => {
   const { user, logout } = useUserAuthContext();
@@ -30,6 +33,43 @@ const Homepage = () => {
       router.push("/");
     } catch (error) {}
   };
+
+  useEffect(()=>{
+    async function setUpServiceWorker (){
+       try {
+        await registerServiceWorker()
+       } catch (error) {
+         console.log(error)
+       }
+    }
+    setUpServiceWorker()
+  },[])
+  
+  useEffect(()=>{
+      async function syncPushSubscription(){
+        try {
+          const subscription = await getCurrentPushSubscription()
+          if(subscription){
+            await sendPushSubscriptionToServer(subscription , user?.uid)
+          }
+        } catch (error) {
+          console.log(err)
+        }
+      }
+      syncPushSubscription()
+  },[])
+
+  const obj={
+    reciever:"t4xffR4ot6RDjwvLmoJIyeISU0v2"
+  }
+  const handleClick = async () =>{
+    const res = await fetch("/api/push-webhook",{
+      method:"POST",
+      body:JSON.stringify(obj)
+    })
+
+    console.log(res)
+  }
   return (
     <div className="bg-gray-100 h-[100vh]">
       <div className="w-full h-[100px] bg-blue-900 flex flex-col items-center justify-center sticky top-0 left-0">
@@ -41,7 +81,9 @@ const Homepage = () => {
             }}
           />
           <div className="flex items-center justify-center gap-2">
-          <NotificationsIcon sx={{ color: "white", margin: 1 }} />
+          {/* <NotificationsIcon sx={{ color: "white", margin: 1 }} /> */}
+          <button onClick={handleClick}>Test notification</button>
+          <NotificationIcon/>
           <Link href="/chats">
             <ChatIcon sx={{ color: "white", margin: 1 }} />
           </Link>
