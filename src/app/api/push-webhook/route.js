@@ -1,7 +1,7 @@
-import { doc, getDoc } from "firebase/firestore"
+import { doc, getDoc, updateDoc } from "firebase/firestore"
 import { NextResponse } from "next/server"
 import { db } from "../../../../firebaseConfig"
-import webPush from "web-push"
+import webPush, { WebPushError } from "web-push"
 
 export async function POST(req){
     try {
@@ -25,7 +25,8 @@ export async function POST(req){
                webPush.sendNotification(
                 subscription,
                 JSON.stringify({
-                    title:"this is a test notification",
+                    title:body.title,
+                    body:"something about the body of the message",
                 }),
                 {
                     vapidDetails:{
@@ -41,6 +42,12 @@ export async function POST(req){
         //    console.log(updatedData)
           } catch (error) {
             console.log(error)
+            // if(error instanceof WebPushError && error.statusCode ===410){
+            //     //filter out invalid subscriptions fromm reciever subscriptions
+            //     await updateDoc(docRef,{
+
+            //     })
+            // }
           }
 
 

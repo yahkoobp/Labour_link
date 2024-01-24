@@ -60,7 +60,10 @@ const Homepage = () => {
   },[])
 
   const obj={
-    reciever:"t4xffR4ot6RDjwvLmoJIyeISU0v2"
+    reciever:"t4xffR4ot6RDjwvLmoJIyeISU0v2",
+    title:"Congatulations",
+    body:"This is a test message and something long",
+    icon:"/success.webp"
   }
   const handleClick = async () =>{
     const res = await fetch("/api/push-webhook",{

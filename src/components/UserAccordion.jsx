@@ -37,6 +37,12 @@ const UserAccordion = (props) => {
   const handleClose = ()=>{
     setOpenDialog(false)
   }
+
+  const notification_obj ={
+    reciever:user?.id,
+    title:"congratulations you have been selected for a work. tap to view",
+    job_id:j_id
+  }
   const handleSelect = async () => {
     try {
       // setResponses([...responses,{...finalData,user_id:}])
@@ -45,6 +51,12 @@ const UserAccordion = (props) => {
         selections: [...selections, user.id],
       });
       console.log(job_data);
+      const res = await fetch("/api/push-webhook",{
+        method:"POST",
+        body:JSON.stringify(notification_obj)
+      })
+  
+      console.log(res)
     } catch (error) {
       console.log(error);
     }

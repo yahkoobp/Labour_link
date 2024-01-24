@@ -167,7 +167,7 @@ import JobCardSkeleton from './Skeletons/JobCardSkeleton';
       ))}
        {<div id="filter" ref={filterRef} className='fixed z-50 bottom-16 left-0 w-full flex items-center 
          justify-center transition-opacity ease-in-out duration-500'>
-        <div className='rounded-full px-6 py-1 flex items-center justify-center gap-2 shadow-lg bg-white cursor-pointer'
+        <div className='rounded-full px-6 py-1 flex items-center justify-center gap-2 shadow-xl bg-gray-100 cursor-pointer'
         onClick={()=>setDrawerOpen(true)}>
           <div className='h-[7px] w-[7px] bg-green-600 rounded-full'></div>
           <TuneIcon/>
