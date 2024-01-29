@@ -75,9 +75,9 @@ const SelectedAppliedJob = () => {
       </div>
 
       <div className="flex flex-col gap-3 mt-4 p-5 shadow-sm">
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center justify-start">
           <WorkIcon sx={{ color: "teal" }} />
-          <h1 className="font-heading text-lg">{jobDetails?.job_title}</h1>
+          <h1 className="font-semibold text-[15px]">{jobDetails?.job_title}</h1>
         </div>
         <div className="flex items-center gap-2">
           <PlaceIcon sx={{ color: "green" }} />

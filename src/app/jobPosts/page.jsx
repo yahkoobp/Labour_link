@@ -28,23 +28,24 @@ const JobPosts = () => {
             }} sx={{color:'gray',cursor:"pointer"}}/>
         </div>
     <div className='p-6'>
-      <h1 className='font-heading'>Your job posts({jobPosts?.length})</h1>
-      { 
+      <h1 className='font-semibold text-[15px]'>Your job posts({jobPosts?.length})</h1>
+       
+      <div  className='flex flex-col bg-gray-50 rounded-md md:grid md:grid-cols-3 mt-3 gap-4'>
+        {
         jobPosts?.map((job)=>(
-        <div key={job.id} className=' bg-gray-50 rounded-md'>
-      <Link href={`/jobPosts/${job.id}`}>
-        <div className='flex flex-col shadow-md mt-2 rounded-md p-6 gap-3 border border-gray-100 '>
+      <Link key={job.id} href={`/jobPosts/${job.id}`}>
+        <div className='flex flex-col shadow-md  rounded-md p-6 gap-3 border border-gray-100 hover:border hover:border-blue-900'>
           <div className='flex items-center justify-between'>
             <div className='flex gap-2'>
-                <WorkIcon sx={{color:"black",width:20,height:20}}/>
-            <h1 className='font-semibold text-md'>{job.job_title}</h1>
+                <WorkIcon sx={{color:"teal",width:20,height:20}}/>
+            <h1 className='font-semibold text-[15px] '>{job.job_title}</h1>
             </div>
             <div className='flex justify-end'>
-            <EditOutlinedIcon sx={{color:"blue"}}/>
+            <EditOutlinedIcon sx={{color:"darkBlue"}}/>
           </div>
             </div>
             <div className='flex gap-2'>
-                <PlaceIcon sx={{color:"black",width:20,height:20}}/>
+                <PlaceIcon sx={{color:"teal",width:20,height:20}}/>
             <h2 className='font-semibold text-sm text-gray-500'>{job.job_location}</h2>
             </div>
 
@@ -58,19 +59,18 @@ const JobPosts = () => {
             </div>
 
             <div className='flex gap-2 justify-between items-center'>
-                <p className='fonr-semibold text-gray-500 text-[13px]'>Posted on {job.time_stamp}</p>
+                <p className='font-semibold text-blue-900 text-[13px]'>Posted on {job.time_stamp}</p>
                 <p className='font-bold text-[12px] text-green-900'>Active now</p>
             </div>
             <div className='flex gap-2 justify-start items-center'>
-                <QuickreplyIcon sx={{width:"20px"}}/>
+                <QuickreplyIcon sx={{width:"20px",color:"teal"}}/>
                 <p className='font-bold text-[12px] text-green-900'>{job.responses.length} Responses</p>
             </div>
 
         </div>
         </Link>
-    </div>
-    
 ))}
+  </div>
     </div>
     </>
   )

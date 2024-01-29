@@ -198,17 +198,20 @@ const UserAccordion = (props) => {
         <DialogTitle>{"Are you sure You wanted to select this labour"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            <div class="alert-bar" id="jobAcceptanceAlert">
+            <div class="alert-bar" id="jobAcceptanceAlert" className="font-bold text-[14px] text-gray-700">
               <p>
                 By selecting this labour, you agree to commit to the following
                 terms:
               </p>
-              <ul>
-                <li>Start Date: [Actual Start Date]</li>
-                <li>End Date: [Actual End Date]</li>
-                <li>Responsibilities: [List of responsibilities]</li>
+              <ul className="flex flex-col gap-2 mt-5">
+                <li>Work type: {data?.job_title} </li>
+                <li>Start Date: {data?.start_date.toDate().toString().split(" ").slice(0,4).join(" ")}</li>
+                <li>End Date: {data?.end_date.toDate().toString().split(" ").slice(0,4).join(" ")} </li>
+                <li>Work location: {data?.job_location} </li>
+                <li>Daily wage: {data?.daily_wage} </li>
+
               </ul>
-              <p>
+              <p className="mt-5">
                 Please review the details carefully to signify your acceptance.
               </p>
             </div>

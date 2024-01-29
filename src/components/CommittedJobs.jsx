@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useUserAuthContext } from '@/app/context/userAuthContext';
 import { db } from '../../firebaseConfig';
 import { useQuery } from 'react-query';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import JobSchedule from './JobSchedule';
 
 const CommittedJobs = () => {
   const {user} = useUserAuthContext()
@@ -52,18 +48,7 @@ const CommittedJobs = () => {
     <div>
       {committedJobs?.length ?
       committedJobs?.map((job)=>(
-        <Accordion key={job?.id}>
-        <AccordionSummary
-          expandIcon={<ArrowDropDownIcon />}
-          aria-controls="panel2-content"
-          id="panel2-header"
-        >
-            <h1 className='font-semibold text-[15px]'>{job?.job_title}</h1>
-        </AccordionSummary>
-        <AccordionDetails>
-           job details
-        </AccordionDetails>
-      </Accordion>
+        <JobSchedule job={job}/>
       )):
       <div><p>You don&apos;t have any committed jobs</p></div>
             

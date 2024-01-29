@@ -30,23 +30,20 @@ const AppliedJobs = () => {
         </div>
     { appliedJobs?.length ?
     <div className='p-6'>
-      <h1 className='font-heading'>Applied jobs({appliedJobs?.length})</h1>
-      { 
+      <h1 className='font-semibold text-[15px]'>Applied jobs({appliedJobs?.length})</h1>
+        <div  className='bg-gray-50 md:grid md:grid-cols-3 md:gap-4'>
+    {
         appliedJobs?.map((job)=>(
-        <div key={job.id} className=' bg-gray-50 rounded-md'>
-      <Link href={`/appliedJobs/${job.id}`}>
-        <div className='flex flex-col shadow-md mt-2 rounded-md p-6 gap-3 border border-gray-100 '>
+      <Link key={job.id} href={`/appliedJobs/${job.id}`}>
+        <div className='flex flex-col shadow-md mt-2 rounded-md p-6 gap-3 border border-gray-100 hover:border hover:border-blue-900'>
           <div className='flex items-center justify-between'>
             <div className='flex gap-2'>
-                <WorkIcon sx={{color:"black",width:20,height:20}}/>
-            <h1 className='font-semibold text-md'>{job.job_title}</h1>
+                <WorkIcon sx={{color:"teal",width:20,height:20}}/>
+            <h1 className='font-semibold text-[15px]'>{job.job_title}</h1>
             </div>
-            <div className='flex justify-end'>
-            <EditOutlinedIcon sx={{color:"blue"}}/>
-          </div>
             </div>
             <div className='flex gap-2'>
-                <PlaceIcon sx={{color:"black",width:20,height:20}}/>
+                <PlaceIcon sx={{color:"teal",width:20,height:20}}/>
             <h2 className='font-semibold text-sm text-gray-500'>{job.job_location}</h2>
             </div>
 
@@ -60,19 +57,18 @@ const AppliedJobs = () => {
             </div>
 
             <div className='flex gap-2 justify-between items-center'>
-                <p className='fonr-semibold text-gray-500 text-[13px]'>Posted on {job.time_stamp}</p>
+                <p className='font-semibold text-blue-900 text-[13px]'>Posted on {job.time_stamp}</p>
                 <p className='font-bold text-[12px] text-green-900'>Active now</p>
             </div>
             <div className='flex gap-2 justify-start items-center'>
-                <QuickreplyIcon sx={{width:"20px"}}/>
+                <QuickreplyIcon sx={{width:"20px",color:"teal"}}/>
                 <p className='font-bold text-[12px] text-green-900'>{job.responses.length} Responses</p>
             </div>
 
         </div>
-        </Link>
-    </div>
-    
+        </Link>  
 ))}
+ </div>
     </div>:
     <div className='flex w-full h-[90vh] items-center justify-center flex-col gap-4'>
        <h1 className='font-bold text-gray-500'>You are not applied for any works</h1>

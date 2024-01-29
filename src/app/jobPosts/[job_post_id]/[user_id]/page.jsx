@@ -80,6 +80,7 @@ const LabourFeedBack = () => {
             ))
            }
           </div>
+          <p className='font-semibold text-[13px] my-3'>Reviewing this labour means that the labour completed the committed work successfully</p>
           <button onClick={handleClick} className='px-6 py-2 bg-teal-800 text-white rounded-md'>Submit</button>
          </div>
     </div>

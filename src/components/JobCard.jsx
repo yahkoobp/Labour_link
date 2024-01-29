@@ -16,7 +16,7 @@ const JobCard = (props) => {
     <Suspense fallback={<JobCardSkeleton/>}>
     <div className='rounded-md'>
       <Link href={`/jobs/${j_id}`}>
-        <div className='flex flex-col shadow-md mt-2 rounded-md p-6 gap-3 border border-gray-200'>
+        <div className='flex flex-col shadow-md rounded-md p-6 gap-3 border border-gray-200 hover:border hover:border-blue-900 hover:shadow-lg'>
             <div className='flex gap-2 items-center'>
                 <WorkIcon sx={{color:"teal",width:20,height:20}}/>
             <h1 className='font-bold text-[15px]'>{job.job_title}</h1>
