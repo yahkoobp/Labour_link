@@ -48,7 +48,7 @@ const CommittedJobs = () => {
     <div>
       {committedJobs?.length ?
       committedJobs?.map((job)=>(
-        <JobSchedule job={job}/>
+        <JobSchedule key={job?.id} job={job}/>
       )):
       <div><p>You don&apos;t have any committed jobs</p></div>
             
