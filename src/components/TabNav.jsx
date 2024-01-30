@@ -11,7 +11,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import { jobs, kerala_cities, kerala_places } from '../data';
-import { Autocomplete, Drawer, Fade, FormControl, FormControlLabel, FormGroup, FormLabel, Radio, RadioGroup, TextField } from '@mui/material';
+import { Autocomplete, Backdrop, CircularProgress, Drawer, Fade, FormControl, FormControlLabel, FormGroup, FormLabel, Radio, RadioGroup, TextField } from '@mui/material';
 import TuneIcon from '@mui/icons-material/Tune';
 import Checkbox from '@mui/material/Checkbox';
 import JobCard from './JobCard';
@@ -19,7 +19,7 @@ import { useUserAuthContext } from '@/app/context/userAuthContext';
 import PostJob from './PostJob';
 import { useJobs } from '@/hooks/useJobs';
 import CommittedJobs from './CommittedJobs';
-import JobCardSkeleton from './Skeletons/JobCardSkeleton';
+import JobCardSkeleton from './Skeletons/SkeletonLoader';
 
 
 
@@ -61,7 +61,7 @@ import JobCardSkeleton from './Skeletons/JobCardSkeleton';
       filter1?.classList?.remove("bg-gray-300")
       filter2?.classList?.add("bg-gray-300")
     }
-    const {data} = useJobs()
+    const {data , isLoading} = useJobs()
     console.log(data)
     
     const handleChange = (event, newValue) => {
@@ -105,6 +105,21 @@ import JobCardSkeleton from './Skeletons/JobCardSkeleton';
       setFilterLocation([])
       setFilterTime("")
       setDrawerOpen(false)
+    }
+
+    if(isLoading){
+      return(
+        <div>
+        <Backdrop
+          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 ,fontWeight:"bold",}}
+          open={true}
+        > <div className='flex flex-col items-center justify-center gap-4'>
+          <CircularProgress/>
+          <span style={{marginLeft:10}}>Loading...</span>
+          </div>
+        </Backdrop>
+      </div>
+      )
     }
     return (
       <div className='' id="container" ref={containerRef}>

@@ -6,7 +6,7 @@ import QuickreplyIcon from '@mui/icons-material/Quickreply';
 import { Fade } from '@mui/material';
 import Link from 'next/link';
 import { useUserAuthContext } from '@/app/context/userAuthContext';
-import JobCardSkeleton from './Skeletons/JobCardSkeleton';
+import JobCardSkeleton from './Skeletons/SkeletonLoader';
 
 const JobCard = (props) => {
   const {user} = useUserAuthContext()

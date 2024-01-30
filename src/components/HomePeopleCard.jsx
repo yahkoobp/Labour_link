@@ -17,9 +17,10 @@ const HomePeopleCard = (props) => {
                 <PlaceIcon sx={{color:"black",width:15}}/>
             <h2 className='font-semibold text-[10px] text-gray-900'>Perinthalmanna</h2>
             </div>
-        <button className='px-10 border border-gray-300 font-semibold text-blue-800 rounded-md hover:scale-90 duration-500 text-[12px]'>View</button>
+        <button className='px-10 py-1 border border-gray-300 font-semibold text-blue-800 rounded-md hover:scale-90 duration-500 text-[12px]'>View</button>
     </div>
   )
 }
 
 export default HomePeopleCard
+//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

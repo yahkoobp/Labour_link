@@ -12,14 +12,23 @@ import { useRouter } from 'next/navigation';
 import { useJobPosts } from '@/hooks/useJobPosts';
 import { useUserAuthContext } from '../context/userAuthContext';
 import { useAppliedJobs } from '@/hooks/useAppliedJobs';
+import SkeletonLoader from '@/components/Skeletons/SkeletonLoader';
 
 
 
 const AppliedJobs = () => {
   const {user} = useUserAuthContext()
   const router = useRouter()
-  const {data:appliedJobs} = useAppliedJobs(user?.uid)
+  const {data:appliedJobs , isLoading} = useAppliedJobs(user?.uid)
   console.log(appliedJobs)
+
+  if(isLoading){
+    return(
+      <div className='flex items-center justify-center h-[100vh]'>
+            <SkeletonLoader/>
+      </div>
+    )
+  }
   return (
      <>
     <div className='h-[50px] shadow-md p-3 sticky top-0 bg-white'>
