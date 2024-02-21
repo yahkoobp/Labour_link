@@ -22,9 +22,14 @@ import Link from "next/link";
 import { registerServiceWorker } from "../utils/serviceWorker";
 import NotificationIcon from "@/components/NotificationIcon";
 import { getCurrentPushSubscription, sendPushSubscriptionToServer } from "@/notifications/PushService";
+import { useQuery } from "react-query";
+import { useHomeJobs } from "@/hooks/useHomeJobs";
+import JobCard from "@/components/JobCard";
+import { useSinglePeoples } from "@/hooks/useSinglePeoples";
 
 const Homepage = () => {
   const { user, logout } = useUserAuthContext();
+  const{data:userData} = useSinglePeoples(user?.uid)
   const [drawerOpen, setDrawerOpen] = useState(false);
   const router = useRouter();
   const handleLogOut = async () => {
@@ -33,6 +38,9 @@ const Homepage = () => {
       router.push("/");
     } catch (error) {}
   };
+  
+  const {data:suggestedJobs} = useHomeJobs(user?.uid)
+  console.log(suggestedJobs)
 
   useEffect(()=>{
     async function setUpServiceWorker (){
@@ -74,7 +82,7 @@ const Homepage = () => {
     console.log(res)
   }
   return (
-    <div className="bg-gray-100 h-[100vh]">
+    <div className="h-[100vh]">
       <div className="w-full h-[100px] bg-blue-900 flex flex-col items-center justify-center sticky top-0 left-0">
         <div className="flex items-center justify-between w-full">
           <MenuIcon
@@ -118,32 +126,22 @@ const Homepage = () => {
       </div>
       <div className="p-6">
         <div className="flex items-center justify-between">
-          <h2 className="font-bold text-[14px]">Suggested Jobs(5)</h2>
-          <h2 className="font-bold text-[14px] text-blue-800 cursor-pointer">
+          <h2 className="font-bold text-[14px]">Suggested Jobs({suggestedJobs?.length})</h2>
+          <Link href="/jobs"><h2 className="font-bold text-[14px] text-blue-800 cursor-pointer">
             View all jobs
-          </h2>
+          </h2></Link>
         </div>
-        <div className="flex gap-2 overflow-x-auto no-scrollbar mt-2">
-          <HomeJobCard />
-          <HomeJobCard />
-          <HomeJobCard />
-          <HomeJobCard />
-        </div>
-      </div>
-
-      <div className="px-6 py-1">
-        <h2 className="font-bold text-[14px]">Peoples you may know(5)</h2>
-        <div className="flex gap-2 overflow-x-auto no-scrollbar mt-2">
-          <HomePeopleCard />
-          <HomePeopleCard />
-          <HomePeopleCard />
-          <HomePeopleCard />
-          <HomePeopleCard />
+        <div className="flex flex-col md:grid md:grid-cols-3 gap-4 mt-4 w-full">
+          {suggestedJobs?.length ? suggestedJobs?.map((job)=>(
+             <JobCard job={job} key={job?.id}/>
+          )):
+          <div className="flex flex-col items-center justify-center gap-4 h-[400px] border w-full">
+          <p className="font-bold text-[14px] text-gray-600">Sorry...cant find any suggested jobs now</p>
+          <Link href="/jobs"><button className="py-1 border-none bg-teal-800 text-white font-bold rounded-md text-[12px] px-2">Search jobs</button></Link>
+          </div>
+         }
         </div>
       </div>
-
-      <div className="h-[100px] bg-gray-100"></div>
-
       <div className="w-full fixed bottom-0 left-0">
         <BottomTab value={0} />
       </div>
@@ -164,7 +162,7 @@ const Homepage = () => {
               />
             </div>
             <div className="flex flex-col ">
-              <h2 className="font-bold">Yahkoob P</h2>
+              <h2 className="font-bold">{userData?.firstname}</h2>
               <p className="text-blue-700 text-[12px]">Update profile</p>
             </div>
             <ChevronRightIcon />

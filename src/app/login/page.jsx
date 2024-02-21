@@ -19,6 +19,7 @@ function LoginPage() {
       setLoading(true)
       await login(email,password)
       setLoading(false)
+      
       route.replace("/home")
     } catch (error) {
       setError(error.message)
