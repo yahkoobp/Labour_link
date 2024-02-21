@@ -93,7 +93,7 @@ const Homepage = () => {
           />
           <div className="flex items-center justify-center gap-2">
           {/* <NotificationsIcon sx={{ color: "white", margin: 1 }} /> */}
-          <button onClick={handleClick}>Test notification</button>
+          {/* <button onClick={handleClick}>Test notification</button> */}
           <NotificationIcon/>
           <Link href="/chats">
             <ChatIcon sx={{ color: "white", margin: 1 }} />
